@@ -3,77 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Reforma de Bíblias - Ateliê Zoê</title>
+    <title>Aprenda Reforma de Bíblias - Ateliê Zoê</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Substitua pelo seu Pixel do Meta -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-gold { background: linear-gradient(90deg, #D4AF37 0%, #F4DF4E 100%); }
+    </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900">
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Barra de Urgência -->
+    <div class="bg-black text-white text-center py-2 text-xs font-bold uppercase tracking-widest">
+        Oferta por tempo limitado: De R$ 97,00 por apenas R$ 47,90
+    </div>
 
     <!-- Hero Section -->
-    <header class="bg-white py-10 px-6 text-center border-b border-gray-100">
-        <div class="max-w-2xl mx-auto">
-            <span class="text-orange-600 font-bold uppercase tracking-widest text-xs">Método Artesanal</span>
-            <h1 class="text-3xl md:text-5xl font-extrabold mt-4 leading-tight">
-                Dê uma <span class="text-orange-600">nova vida</span> à sua Bíblia ou comece um novo negócio
+    <header class="py-12 px-6 text-center bg-white">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tight">
+                Recupere a beleza da sua <span class="text-orange-600">Bíblia Sagrada</span>
             </h1>
-            <p class="mt-6 text-lg text-gray-600">Aprenda a restaurar capas, folhas e acabamentos com técnicas simples de encadernação.</p>
+            <p class="mt-6 text-lg md:text-xl text-slate-600 max-w-xl mx-auto">
+                Um método passo a passo para transformar Bíblias antigas em peças de luxo, sem precisar de máquinas profissionais.
+            </p>
             
-            <!-- CTA Principal -->
+            <!-- Botão CTA -->
             <div class="mt-10">
-                <a href="SEU_LINK_CHECKOUT_HOTMART" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition-all transform hover:scale-105 inline-block">
-                    QUERO APRENDER POR APENAS R$ 47,90
+                <a href="SEU_LINK_CHECKOUT" class="bg-green-600 hover:bg-green-700 text-white font-bold py-5 px-10 rounded-2xl text-xl shadow-2xl shadow-green-200 transition-all transform hover:scale-105 inline-block w-full md:w-auto">
+                    QUERO ME INSCREVER AGORA
                 </a>
-                <p class="text-sm text-gray-400 mt-3 italic">Acesso imediato e vitalício</p>
+                <div class="mt-4 flex items-center justify-center gap-2 text-sm text-slate-400">
+                    <span>Acesso Imediato</span> • <span>Compra Segura</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Seção Antes e Depois -->
-    <section class="py-16 px-6 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-bold text-center mb-10">Resultados Reais</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="rounded-xl overflow-hidden shadow-md">
-                <img src="IMAGEM_ANTES.jpg" alt="Antes" class="w-full h-64 object-cover">
-                <p class="bg-gray-200 text-center py-2 font-bold uppercase text-xs tracking-widest text-gray-600">Estado Inicial</p>
+    <!-- O Problema (O que gera a venda) -->
+    <section class="py-16 bg-slate-100 px-6">
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold mb-6">Sua Bíblia está assim?</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3 text-slate-700">❌ Capa descascando ou solta</li>
+                    <li class="flex items-center gap-3 text-slate-700">❌ Páginas caindo ou amareladas</li>
+                    <li class="flex items-center gap-3 text-slate-700">❌ Visual "velho" e sem brilho</li>
+                </ul>
+                <p class="mt-6 font-semibold text-orange-600 italic text-lg">
+                    "Não é apenas um livro, é a Palavra. Ela merece cuidado."
+                </p>
             </div>
-            <div class="rounded-xl overflow-hidden shadow-md border-2 border-orange-500">
-                <img src="IMAGEM_DEPOIS.jpg" alt="Depois" class="w-full h-64 object-cover">
-                <p class="bg-orange-500 text-center py-2 font-bold uppercase text-xs tracking-widest text-white text-gray-600">Após a Reforma</p>
+            <div class="rounded-3xl overflow-hidden shadow-2xl rotate-2">
+                <img src="https://via.placeholder.com/400x500" alt="Exemplo de Bíblia Reformada" class="w-full h-full object-cover">
             </div>
         </div>
     </section>
 
-    <!-- O que você vai aprender -->
-    <section class="bg-gray-100 py-16 px-6">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-2xl font-bold mb-8">O que você vai dominar:</h2>
-            <ul class="space-y-4">
-                <li class="flex items-start bg-white p-4 rounded-lg shadow-sm">
-                    <span class="text-green-500 mr-3">✔</span>
-                    <span><strong>Troca de Capas:</strong> Materiais resistentes e acabamento premium.</span>
-                </li>
-                <li class="flex items-start bg-white p-4 rounded-lg shadow-sm">
-                    <span class="text-green-500 mr-3">✔</span>
-                    <span><strong>Colagem de Folhas:</strong> Como salvar páginas soltas sem danificar.</span>
-                </li>
-                <li class="flex items-start bg-white p-4 rounded-lg shadow-sm">
-                    <span class="text-green-500 mr-3">✔</span>
-                    <span><strong>Personalização:</strong> Detalhes que agregam valor ao seu serviço.</span>
-                </li>
-            </ul>
+    <!-- Conteúdo do Curso -->
+    <section class="py-20 px-6 max-w-5xl mx-auto">
+        <h2 class="text-center text-3xl font-bold mb-16">O que você vai aprender:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                <div class="text-3xl mb-4">📖</div>
+                <h3 class="font-bold text-xl mb-2">Troca de Capas</h3>
+                <p class="text-slate-500 text-sm">Técnicas de encadernação artesanal com materiais acessíveis.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                <div class="text-3xl mb-4">🛠️</div>
+                <h3 class="font-bold text-xl mb-2">Restauração</h3>
+                <p class="text-slate-500 text-sm">Como recuperar miolos soltos e folhas danificadas.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                <div class="text-3xl mb-4">✨</div>
+                <h3 class="font-bold text-xl mb-2">Personalização</h3>
+                <p class="text-slate-500 text-sm">Aplicação de detalhes que tornam cada bíblia única.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Footer Oferta -->
-    <footer class="py-20 px-6 text-center">
-        <div class="max-w-xl mx-auto border-2 border-dashed border-gray-300 p-8 rounded-2xl">
-            <p class="text-gray-500 line-through text-lg">De R$ 97,00</p>
-            <p class="text-4xl font-black text-orange-600 mt-2">Por apenas R$ 47,90</p>
-            <a href="SEU_LINK_CHECKOUT_HOTMART" class="mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg block">
-                MATRICULAR-SE AGORA
-            </a>
-            <p class="mt-4 text-xs text-gray-400 uppercase">Compra 100% Segura via Hotmart</p>
+    <!-- FAQ -->
+    <section class="py-20 bg-white px-6">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center text-slate-900">Dúvidas Frequentes</h2>
+            <div class="space-y-6">
+                <details class="group bg-slate-50 p-6 rounded-2xl cursor-pointer">
+                    <summary class="font-bold list-none flex justify-between items-center">
+                        Preciso de máquinas caras?
+                        <span class="group-open:rotate-180 transition-transform">↓</span>
+                    </summary>
+                    <p class="mt-4 text-slate-600">Não! A Priscila ensina técnicas manuais que você pode fazer na mesa da sua cozinha.</p>
+                </details>
+                <details class="group bg-slate-50 p-6 rounded-2xl cursor-pointer">
+                    <summary class="font-bold list-none flex justify-between items-center">
+                        Como recebo o curso?
+                        <span class="group-open:rotate-180 transition-transform">↓</span>
+                    </summary>
+                    <p class="mt-4 text-slate-600">O acesso é enviado imediatamente para o seu e-mail após a confirmação do pagamento pela Hotmart.</p>
+                </details>
+            </div>
         </div>
+    </section>
+
+    <!-- Footer Checkout -->
+    <footer class="py-20 bg-slate-900 text-white text-center px-6">
+        <h2 class="text-3xl font-bold mb-6 italic">Aproveite o preço de lançamento</h2>
+        <div class="text-5xl font-black text-orange-400 mb-8">R$ 47,90</div>
+        <a href="SEU_LINK_CHECKOUT" class="bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-12 rounded-full text-2xl transition-all inline-block shadow-xl">
+            SIM! QUERO COMEÇAR AGORA
+        </a>
+        <p class="mt-8 text-slate-500 text-sm">Ateliê Zoê © 2026 - Todos os direitos reservados.</p>
     </footer>
 
 </body>
