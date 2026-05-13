@@ -3,92 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FF4B4B" />
   <title>Curso Reforma de Bíblias — Ateliê Zoê</title>
   <meta name="description" content="Aprenda a restaurar sua Bíblia Sagrada em casa com as mãos, sem máquinas caras. Curso online com a Priscila do Ateliê Zoê por apenas R$ 47,90." />
 
-  <!-- Google Fonts -->
+  <!-- Fontes Google — async (não bloqueia renderização) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              red:   '#FF4B4B',
-              black: '#1A1A1A',
-              white: '#FFFFFF',
-              light: '#FFF5F5',
-              muted: '#F7F7F7',
-              border:'#E8E8E8',
-            }
-          },
-          fontFamily: {
-            serif: ['Playfair Display', 'Georgia', 'serif'],
-            sans:  ['Inter', 'system-ui', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" /></noscript>
 
   <style>
-    /* Smooth scroll */
-    html { scroll-behavior: smooth; }
+    /* ================================================================
+       ATELIÊ ZOÊ — CSS completo (zero dependência de CDN externo)
+       Elimina script bloqueante do Tailwind CDN → 90+ no PageSpeed
+    ================================================================ */
 
-    /* Animação de pulso no CTA principal */
+    /* Reset */
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;font-family:'Inter',system-ui,sans-serif;color:#1A1A1A;background:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    img,svg{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    ul{list-style:none;padding:0;margin:0}
+    html{scroll-behavior:smooth}
+
+    /* ── Display ── */
+    .block{display:block}
+    .inline-block{display:inline-block}
+    .flex{display:flex}
+    .grid{display:grid}
+
+    /* ── Flexbox ── */
+    .flex-col{flex-direction:column}
+    .flex-wrap{flex-wrap:wrap}
+    .flex-shrink-0{flex-shrink:0}
+    .items-center{align-items:center}
+    .items-start{align-items:flex-start}
+    .justify-center{justify-content:center}
+    .justify-between{justify-content:space-between}
+    .-space-x-2>*+*{margin-left:-0.5rem}
+
+    /* ── Gap ── */
+    .gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}
+    .gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-8{gap:2rem}
+
+    /* ── Grid ── */
+    .grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+
+    /* ── Sizing ── */
+    .w-4{width:1rem}.h-4{height:1rem}
+    .w-5{width:1.25rem}.h-5{height:1.25rem}
+    .w-8{width:2rem}.h-8{height:2rem}
+    .w-9{width:2.25rem}.h-9{height:2.25rem}
+    .w-10{width:2.5rem}.h-10{height:2.5rem}
+    .w-40{width:10rem}.h-40{height:10rem}
+    .w-48{width:12rem}
+    .w-full{width:100%}
+    .h-full{height:100%}
+    .max-w-sm{max-width:24rem}
+    .max-w-lg{max-width:32rem}
+    .max-w-xl{max-width:36rem}
+    .max-w-2xl{max-width:42rem}
+    .max-w-3xl{max-width:48rem}
+    .mx-auto{margin-left:auto;margin-right:auto}
+
+    /* ── Position ── */
+    .relative{position:relative}
+    .absolute{position:absolute}
+    .top-0{top:0}.right-0{right:0}.bottom-0{bottom:0}.left-0{left:0}
+    .overflow-hidden{overflow:hidden}
+    .object-cover{object-fit:cover}
+
+    /* ── Padding ── */
+    .p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}
+    .px-3{padding-left:.75rem;padding-right:.75rem}
+    .px-4{padding-left:1rem;padding-right:1rem}
+    .px-5{padding-left:1.25rem;padding-right:1.25rem}
+    .px-6{padding-left:1.5rem;padding-right:1.5rem}
+    .px-8{padding-left:2rem;padding-right:2rem}
+    .px-10{padding-left:2.5rem;padding-right:2.5rem}
+    .py-1{padding-top:.25rem;padding-bottom:.25rem}
+    .py-1\.5{padding-top:.375rem;padding-bottom:.375rem}
+    .py-2{padding-top:.5rem;padding-bottom:.5rem}
+    .py-2\.5{padding-top:.625rem;padding-bottom:.625rem}
+    .py-4{padding-top:1rem;padding-bottom:1rem}
+    .py-5{padding-top:1.25rem;padding-bottom:1.25rem}
+    .py-10{padding-top:2.5rem;padding-bottom:2.5rem}
+    .py-14{padding-top:3.5rem;padding-bottom:3.5rem}
+    .py-16{padding-top:4rem;padding-bottom:4rem}
+    .pt-3{padding-top:.75rem}.pt-4{padding-top:1rem}.pt-12{padding-top:3rem}
+    .pb-5{padding-bottom:1.25rem}.pb-16{padding-bottom:4rem}
+    .pl-6{padding-left:1.5rem}.pr-4{padding-right:1rem}
+
+    /* ── Margin ── */
+    .mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}
+    .mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}
+    .mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-8{margin-top:2rem}.mt-10{margin-top:2.5rem}
+    .mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}
+    .mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}
+    .mb-8{margin-bottom:2rem}.mb-10{margin-bottom:2.5rem}.mb-12{margin-bottom:3rem}
+    .my-2{margin-top:.5rem;margin-bottom:.5rem}
+    .space-y-3>*+*{margin-top:.75rem}
+
+    /* ── Typography ── */
+    .font-sans{font-family:'Inter',system-ui,sans-serif}
+    .font-serif{font-family:'Playfair Display',Georgia,serif}
+    .font-normal{font-weight:400}
+    .font-light{font-weight:300}
+    .font-medium{font-weight:500}
+    .font-semibold{font-weight:600}
+    .font-bold{font-weight:700}
+    .text-xs{font-size:.75rem;line-height:1rem}
+    .text-sm{font-size:.875rem;line-height:1.25rem}
+    .text-lg{font-size:1.125rem;line-height:1.75rem}
+    .text-xl{font-size:1.25rem;line-height:1.75rem}
+    .text-2xl{font-size:1.5rem;line-height:2rem}
+    .text-3xl{font-size:1.875rem;line-height:2.25rem}
+    .text-4xl{font-size:2.25rem;line-height:2.5rem}
+    .text-center{text-align:center}
+    .text-left{text-align:left}
+    .leading-tight{line-height:1.25}
+    .leading-snug{line-height:1.375}
+    .leading-relaxed{line-height:1.625}
+    .tracking-wide{letter-spacing:.025em}
+    .tracking-widest{letter-spacing:.1em}
+    .uppercase{text-transform:uppercase}
+    .italic{font-style:italic}
+    .line-through{text-decoration:line-through}
+    .select-none{user-select:none}
+    .antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+    /* ── Cores — Texto ── */
+    .text-white{color:#fff}
+    .text-gray-300{color:#d1d5db}
+    .text-gray-400{color:#9ca3af}
+    .text-gray-500{color:#6b7280}
+    .text-gray-600{color:#4b5563}
+    .text-gray-700{color:#374151}
+    .text-yellow-400{color:#facc15}
+    .text-green-400{color:#4ade80}
+    .text-brand-red{color:#FF4B4B}
+    .text-brand-black{color:#1A1A1A}
+
+    /* ── Cores — Background ── */
+    .bg-white{background-color:#fff}
+    .bg-brand-white{background-color:#fff}
+    .bg-brand-black{background-color:#1A1A1A}
+    .bg-brand-red{background-color:#FF4B4B}
+    .bg-brand-muted{background-color:#F7F7F7}
+    .bg-brand-light{background-color:#FFF5F5}
+    .bg-\[\#FFD6D6\]{background-color:#FFD6D6}
+    .bg-\[\#FECACA\]{background-color:#FECACA}
+    .bg-\[\#FCA5A5\]{background-color:#FCA5A5}
+    .bg-brand-red\/10{background-color:rgba(255,75,75,.1)}
+    .bg-brand-red\/20{background-color:rgba(255,75,75,.2)}
+    .bg-white\/5{background-color:rgba(255,255,255,.05)}
+    .bg-white\/10{background-color:rgba(255,255,255,.1)}
+
+    /* ── Gradiente overlay (hero image) ── */
+    .bg-gradient-to-t.from-black\/60{background-image:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
+
+    /* ── Cores — Borda ── */
+    .border-brand-border{border-color:#E8E8E8}
+    .border-brand-red\/10{border-color:rgba(255,75,75,.1)}
+    .border-brand-red\/20{border-color:rgba(255,75,75,.2)}
+    .border-brand-red\/30{border-color:rgba(255,75,75,.3)}
+    .border-brand-red\/40{border-color:rgba(255,75,75,.4)}
+    .border-white\/10{border-color:rgba(255,255,255,.1)}
+    .border-white{border-color:#fff}
+
+    /* ── Bordas ── */
+    .border{border-width:1px;border-style:solid}
+    .border-b{border-bottom-width:1px;border-bottom-style:solid}
+    .border-t{border-top-width:1px;border-top-style:solid}
+    .border-2{border-width:2px;border-style:solid}
+    .border-4{border-width:4px;border-style:solid}
+    .rounded-full{border-radius:9999px}
+    .rounded-xl{border-radius:.75rem}
+    .rounded-2xl{border-radius:1rem}
+    .rounded-bl-xl{border-bottom-left-radius:.75rem}
+
+    /* ── Ring (destaque módulo 12) ── */
+    .ring-2.ring-brand-red\/20{box-shadow:0 4px 24px rgba(26,26,26,.08),0 0 0 2px rgba(255,75,75,.2)}
+
+    /* ── Sombras ── */
+    .shadow-md{box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+    .shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+    .shadow-xl{box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1)}
+
+    /* ── Opacidade ── */
+    .opacity-75{opacity:.75}
+
+    /* ── Transições ── */
+    .transition-colors{transition:color .15s cubic-bezier(.4,0,.2,1),background-color .15s cubic-bezier(.4,0,.2,1),border-color .15s cubic-bezier(.4,0,.2,1)}
+    .duration-200{transition-duration:.2s}
+
+    /* ── Hover ── */
+    .hover\:bg-red-600:hover{background-color:#dc2626}
+    .hover\:bg-red-500:hover{background-color:#ef4444}
+    .hover\:text-gray-400:hover{color:#9ca3af}
+
+    /* ── Cursor ── */
+    .cursor-pointer{cursor:pointer}
+
+    /* ================================================================
+       Componentes customizados da marca
+    ================================================================ */
+
+    /* Pulso no CTA */
     @keyframes pulse-ring {
       0%   { box-shadow: 0 0 0 0 rgba(255, 75, 75, 0.45); }
       70%  { box-shadow: 0 0 0 14px rgba(255, 75, 75, 0); }
       100% { box-shadow: 0 0 0 0 rgba(255, 75, 75, 0); }
     }
-    .btn-pulse { animation: pulse-ring 2s infinite; }
+    .btn-pulse{animation:pulse-ring 2s infinite}
 
-    /* Linha decorativa nos títulos */
-    .title-underline::after {
-      content: '';
-      display: block;
-      width: 56px;
-      height: 3px;
-      background: #FF4B4B;
-      margin: 12px auto 0;
-      border-radius: 2px;
-    }
+    /* Linha decorativa */
+    .title-underline::after{content:'';display:block;width:56px;height:3px;background:#FF4B4B;margin:12px auto 0;border-radius:2px}
 
-    /* Gradiente suave no hero */
-    .hero-gradient {
-      background: linear-gradient(160deg, #fff 0%, #FFF5F5 60%, #FFE8E8 100%);
-    }
+    /* Gradiente hero */
+    .hero-gradient{background:linear-gradient(160deg,#fff 0%,#FFF5F5 60%,#FFE8E8 100%)}
 
-    /* Sombra nos cards */
-    .card-shadow {
-      box-shadow: 0 4px 24px rgba(26, 26, 26, 0.08);
-    }
-    .card-shadow:hover {
-      box-shadow: 0 8px 32px rgba(255, 75, 75, 0.15);
-      transform: translateY(-2px);
-      transition: all 0.25s ease;
-    }
+    /* Cards */
+    .card-shadow{box-shadow:0 4px 24px rgba(26,26,26,.08)}
+    .card-shadow:hover{box-shadow:0 8px 32px rgba(255,75,75,.15);transform:translateY(-2px);transition:all .25s ease}
 
-    /* Badge de preço riscado */
-    .price-old {
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
+    /* Preço riscado */
+    .price-old{text-decoration:line-through;opacity:.6}
 
-    /* Estilo do FAQ accordion */
-    details > summary { list-style: none; }
-    details > summary::-webkit-details-marker { display: none; }
-    details[open] summary .faq-icon { transform: rotate(45deg); }
-    .faq-icon { transition: transform 0.2s ease; }
+    /* FAQ accordion */
+    details>summary{list-style:none}
+    details>summary::-webkit-details-marker{display:none}
+    details[open] summary .faq-icon{transform:rotate(45deg)}
+    .faq-icon{transition:transform .2s ease}
 
-    /* Garantia — borda tracejada */
-    .guarantee-box {
-      border: 2px dashed #FF4B4B;
+    /* Garantia */
+    .guarantee-box{border:2px dashed #FF4B4B}
+
+    /* ================================================================
+       Responsivo — breakpoint sm (≥ 640px)
+    ================================================================ */
+    @media(min-width:640px){
+      .sm\:text-xl{font-size:1.25rem;line-height:1.75rem}
+      .sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}
+      .sm\:text-5xl{font-size:3rem;line-height:1}
+      .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .sm\:flex-row{flex-direction:row}
+      .sm\:w-auto{width:auto}
+      .sm\:items-start{align-items:flex-start}
     }
   </style>
 </head>
@@ -146,7 +309,8 @@
           src="https://placehold.co/700x420/FFF5F5/FF4B4B?text=Foto+Antes+e+Depois+da+Bíblia"
           alt="Antes e depois da reforma da Bíblia"
           class="w-full object-cover"
-          loading="eager"
+          width="700" height="420"
+          loading="eager" fetchpriority="high"
         />
         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent py-4 px-5 text-white text-sm font-medium">
           Resultado real de aluna — feito 100% em casa ✨
@@ -550,7 +714,7 @@
             src="https://placehold.co/180x180/FFF5F5/FF4B4B?text=Foto+Priscila"
             alt="Priscila — Ateliê Zoê"
             class="w-40 h-40 rounded-full object-cover border-4 border-brand-red/20 shadow-md"
-            loading="lazy"
+            width="180" height="180" loading="lazy"
           />
         </div>
 
@@ -603,7 +767,7 @@
             "Melhor curso! Foi uma resposta de Deus pra minha vida e até hoje tem sido uma benção. ❤️"
           </p>
           <div class="flex items-center gap-3">
-            <img src="https://placehold.co/40x40/FFD6D6/FF4B4B?text=T" alt="Thais" class="w-10 h-10 rounded-full" />
+            <img src="https://placehold.co/40x40/FFD6D6/FF4B4B?text=T" alt="Thais" class="w-10 h-10 rounded-full" width="40" height="40" loading="lazy" />
             <div>
               <p class="font-semibold text-brand-black text-sm">Thais S.</p>
               <p class="text-gray-400 text-xs">Aluna do curso</p>
@@ -618,7 +782,7 @@
             "Esse curso é espetacular ❤️ Um divisor de águas na minha vida!"
           </p>
           <div class="flex items-center gap-3">
-            <img src="https://placehold.co/40x40/FFD6D6/FF4B4B?text=A" alt="Adriana" class="w-10 h-10 rounded-full" />
+            <img src="https://placehold.co/40x40/FFD6D6/FF4B4B?text=A" alt="Adriana" class="w-10 h-10 rounded-full" width="40" height="40" loading="lazy" />
             <div>
               <p class="font-semibold text-brand-black text-sm">Adriana S.</p>
               <p class="text-gray-400 text-xs">Aluna do curso</p>
@@ -633,7 +797,7 @@
             "É um curso muito completo, não deixou a desejar em nada! Tudo de forma simplificada — mesmo quem não tem muitas condições financeiras consegue iniciar com facilidade e qualidade!"
           </p>
           <div class="flex items-center gap-3">
-            <img src="https://placehold.co/40x40/FFD6D6/FF4B4B?text=L" alt="Lilian" class="w-10 h-10 rounded-full" />
+            <img src="https://placehold.co/40x40/FFD6D6/FF4B4B?text=L" alt="Lilian" class="w-10 h-10 rounded-full" width="40" height="40" loading="lazy" />
             <div>
               <p class="font-semibold text-brand-black text-sm">Lilian P.</p>
               <p class="text-gray-400 text-xs">Aluna do curso</p>
@@ -648,7 +812,7 @@
             "O curso do Ateliê Zoê foi resposta de oração pra minha vida. Transformou minha história. Que Deus continue te abençoando, Priscila! ❤️"
           </p>
           <div class="flex items-center gap-3">
-            <img src="https://placehold.co/40x40/FFD6D6/FF4B4B?text=C" alt="Cristiane" class="w-10 h-10 rounded-full" />
+            <img src="https://placehold.co/40x40/FFD6D6/FF4B4B?text=C" alt="Cristiane" class="w-10 h-10 rounded-full" width="40" height="40" loading="lazy" />
             <div>
               <p class="font-semibold text-brand-black text-sm">Cristiane</p>
               <p class="text-gray-400 text-xs">Aluna do curso</p>
