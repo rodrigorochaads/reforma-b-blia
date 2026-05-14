@@ -1,13 +1,6 @@
 {
   "version": 2,
-  "name": "atelier-zoe-reforma-biblias",
   "outputDirectory": ".",
-  "functions": {
-    "api/track.js": {
-      "runtime": "nodejs20.x",
-      "maxDuration": 10
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
