@@ -1055,83 +1055,99 @@
 
 
 <!-- ============================================================
-     RASTREAMENTO — Ateliê Zoê
+     RASTREAMENTO — Ateliê Zoê (Vercel + CAPI)
      ─────────────────────────────────────────────────────────────
-     COMO ATIVAR (só precisa trocar os 2 IDs abaixo):
+     ARQUITETURA:
+       Browser → Pixel (fbq)  → Meta  [com deduplicação por event_id]
+       Browser → /api/track   → Vercel Serverless → Meta CAPI (server-side)
 
-     GTM_ID  → seu ID do Google Tag Manager
-                Onde achar: tagmanager.google.com → seu container
-                Formato: GTM-AB12CD3
+     VARIÁVEIS DE AMBIENTE (configurar no painel Vercel):
+       CAPI_ACCESS_TOKEN → Meta Events Manager → seu Pixel → Configurações
+                           → API de Conversões → Gerar token de acesso
+       PIXEL_ID          → já definido no código (144321805290742)
 
-     PIXEL_ID → seu ID do Meta Pixel (Facebook/Instagram Ads)
-                Onde achar: business.facebook.com → Gerenciador de Eventos
-                Formato: 1234567890123456
-
-     ► Com IDs de placeholder: zero requests externos, nota 90+ preservada
-     ► Com IDs reais: GTM + Pixel carregam após load (sem impacto no LCP)
-     ─────────────────────────────────────────────────────────────
-     EVENTOS que já estão sendo capturados no dataLayer:
-       • click_cta + begin_checkout → clique em qualquer botão de compra
-       • scroll_depth (25/50/75/90%) → profundidade de leitura
-       • tempo_pagina (30s/60s/120s) → engajamento real vs bounce
-     ─────────────────────────────────────────────────────────────
-     NO GTM (após ter o ID real):
-       1. Crie Tag → GA4 → apontando para seu Measurement ID
-       2. Crie Tag → Meta Pixel → apontando para seu Pixel ID
-       3. Gatilhos: "Evento personalizado" com nome = click_cta / scroll_depth / tempo_pagina
-       4. Publique o container
+     PARA ATIVAR GA4 via GTM:
+       Troque GTM_ID abaixo pelo seu ID real (GTM-XXXXXX)
+       Dentro do GTM: crie tag GA4 + gatilhos para click_cta / scroll_depth / tempo_pagina
 ============================================================ -->
 <script>
 (function() {
   'use strict';
 
-  /* ── IDs de rastreamento — troque aqui quando tiver os dados reais ── */
-  var GTM_ID   = 'GTM-XXXXXXX';      /* ← substitua pelo seu ID do GTM quando criar a conta */
-  var PIXEL_ID = '144321805290742'; /* Pixel da Priscila — Ateliê Zoê */
+  /* ════════════════════════════════════════════════════════════
+     IDs — só o GTM falta; Pixel já está ativo
+  ════════════════════════════════════════════════════════════ */
+  var GTM_ID   = 'GTM-XXXXXXX';     /* ← troque pelo seu ID GTM quando criar */
+  var PIXEL_ID = '144321805290742'; /* Pixel Ateliê Zoê */
 
-  /* ── Detecta se os IDs são reais ou ainda placeholders ── */
-  var GTM_ATIVO   = GTM_ID   !== 'GTM-XXXXXXX'   && GTM_ID   !== '';
-  var PIXEL_ATIVO = PIXEL_ID !== 'PIXEL_ID_AQUI' && PIXEL_ID !== '';
+  var GTM_ATIVO   = GTM_ID !== 'GTM-XXXXXXX' && GTM_ID !== '';
+  var PIXEL_ATIVO = true; /* Pixel ID real já definido */
 
-  /* ── dataLayer: fila de eventos — acumula mesmo antes do GTM carregar ── */
+  /* ── dataLayer para GA4 via GTM ── */
   window.dataLayer = window.dataLayer || [];
-
-  function pushGA4(eventName, params) {
-    window.dataLayer.push(Object.assign({ event: eventName }, params || {}));
+  function pushGA4(name, params) {
+    window.dataLayer.push(Object.assign({ event: name }, params || {}));
   }
 
-  function pixelTrack(eventName, params) {
-    if (typeof fbq === 'function') fbq('track', eventName, params || {});
+  /* ════════════════════════════════════════════════════════════
+     HELPERS — event_id, cookies _fbp/_fbc, CAPI + Pixel juntos
+  ════════════════════════════════════════════════════════════ */
+
+  /* Gera ID único por evento para deduplicação Meta */
+  function genEventId() {
+    return 'ev_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
   }
 
-  /* ────────────────────────────────────────────────────────────
-     CARREGAR GTM + PIXEL após window.load
-     → Zero impacto no LCP / PageSpeed
-     → Eventos de CTA que acontecerem antes do load são raros
-       (usuário dificilmente clica antes de tudo carregar)
-  ──────────────────────────────────────────────────────────── */
-  window.addEventListener('load', function() {
+  /* Lê cookie pelo nome */
+  function getCookie(name) {
+    var m = document.cookie.match('(?:^|;)\\s*' + name + '=([^;]*)');
+    return m ? decodeURIComponent(m[1]) : undefined;
+  }
 
-    /* ── Google Tag Manager ── */
-    if (GTM_ATIVO) {
-      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-      var gtmScript    = document.createElement('script');
-      gtmScript.async  = true;
-      gtmScript.src    = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
-      document.head.appendChild(gtmScript);
+  /* Dispara Pixel browser + CAPI server-side com mesmo event_id */
+  function track(eventName, customData) {
+    var eventId = genEventId();
+    var fbpCookie = getCookie('_fbp');
+    var fbcCookie = getCookie('_fbc');
 
-      /* noscript fallback do GTM */
-      var ns   = document.createElement('noscript');
-      var nsIf = document.createElement('iframe');
-      nsIf.src              = 'https://www.googletagmanager.com/ns.html?id=' + GTM_ID;
-      nsIf.height           = '0';
-      nsIf.width            = '0';
-      nsIf.style.cssText    = 'display:none;visibility:hidden';
-      ns.appendChild(nsIf);
-      document.body.insertBefore(ns, document.body.firstChild);
+    /* ── Browser Pixel (com eventID para deduplicação) ── */
+    if (typeof fbq === 'function') {
+      fbq('track', eventName, customData || {}, { eventID: eventId });
     }
 
-    /* ── Meta Pixel ── */
+    /* ── CAPI server-side via Vercel /api/track ── */
+    fetch('/api/track', {
+      method  : 'POST',
+      headers : { 'Content-Type': 'application/json' },
+      body    : JSON.stringify({
+        event_name       : eventName,
+        event_id         : eventId,
+        event_source_url : window.location.href,
+        fbp              : fbpCookie,
+        fbc              : fbcCookie,
+        custom_data      : customData || {}
+      })
+    }).catch(function() { /* falha silenciosa */ });
+
+    return eventId;
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     CARREGAMENTO DEFERIDO — GTM + Pixel após window.load
+     Zero impacto no LCP / PageSpeed
+  ════════════════════════════════════════════════════════════ */
+  window.addEventListener('load', function() {
+
+    /* ── GTM (quando ID real estiver configurado) ── */
+    if (GTM_ATIVO) {
+      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src   = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+      document.head.appendChild(s);
+    }
+
+    /* ── Meta Pixel browser ── */
     if (PIXEL_ATIVO) {
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -1140,8 +1156,12 @@
       (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
       fbq('init', PIXEL_ID);
+
+      /* PageView — browser-only (sem CAPI, evento de baixo valor) */
       fbq('track', 'PageView');
-      fbq('track', 'ViewContent', {
+
+      /* ViewContent — browser + CAPI (evento importante para audiências) */
+      track('ViewContent', {
         content_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
         content_type : 'product',
         content_ids  : ['reforma-biblias-v1'],
@@ -1152,68 +1172,55 @@
 
   }); /* fim window.load */
 
-  /* ────────────────────────────────────────────────────────────
-     1. CLIQUE EM CTA → InitiateCheckout + begin_checkout
-        Identifica qual botão foi clicado (hero / meio / oferta_final)
-  ──────────────────────────────────────────────────────────── */
+  /* ════════════════════════════════════════════════════════════
+     1. CLIQUE NO CTA → InitiateCheckout (browser + CAPI)
+        O evento mais importante antes do Purchase
+  ════════════════════════════════════════════════════════════ */
   document.querySelectorAll('a[href*="hotmart.com"]').forEach(function(btn, index) {
     btn.addEventListener('click', function() {
-      var posicao = index === 0 ? 'hero'
-                  : index === 1 ? 'meio_pagina'
-                  : 'oferta_final';
-
-      pushGA4('click_cta', {
-        cta_posicao : posicao,
-        cta_texto   : btn.textContent.trim().substring(0, 60),
-        valor       : 47.90,
-        moeda       : 'BRL',
-        produto     : 'Curso Reforma de Bíblias'
-      });
-
-      pushGA4('begin_checkout', {
-        currency : 'BRL',
-        value    : 47.90,
-        items    : [{ item_id: 'reforma-biblias-v1',
-                      item_name: 'Curso Reforma de Bíblias — Ateliê Zoê',
-                      price: 47.90, quantity: 1 }]
-      });
-
-      pixelTrack('InitiateCheckout', {
+      var posicao = index === 0 ? 'hero' : index === 1 ? 'meio_pagina' : 'oferta_final';
+      var dados   = {
         content_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
         content_ids  : ['reforma-biblias-v1'],
         value        : 47.90,
         currency     : 'BRL',
         num_items    : 1
+      };
+
+      /* GA4 via GTM */
+      pushGA4('click_cta', { cta_posicao: posicao, valor: 47.90, moeda: 'BRL' });
+      pushGA4('begin_checkout', {
+        currency : 'BRL', value: 47.90,
+        items    : [{ item_id: 'reforma-biblias-v1',
+                      item_name: 'Curso Reforma de Bíblias — Ateliê Zoê',
+                      price: 47.90, quantity: 1 }]
       });
+
+      /* Meta: Pixel browser + CAPI server-side com deduplicação */
+      track('InitiateCheckout', dados);
     });
   });
 
-  /* ────────────────────────────────────────────────────────────
-     2. SCROLL DEPTH — 25% / 50% / 75% / 90%
-  ──────────────────────────────────────────────────────────── */
-  var scrollMarcas   = [25, 50, 75, 90];
-  var scrollDisparado = {};
-
+  /* ════════════════════════════════════════════════════════════
+     2. SCROLL DEPTH — 25 / 50 / 75 / 90%
+  ════════════════════════════════════════════════════════════ */
+  var scrollMarcas = [25, 50, 75, 90], scrollHit = {};
   window.addEventListener('scroll', function() {
     var pct = Math.floor(((window.scrollY + window.innerHeight) /
                            document.documentElement.scrollHeight) * 100);
     scrollMarcas.forEach(function(m) {
-      if (!scrollDisparado[m] && pct >= m) {
-        scrollDisparado[m] = true;
+      if (!scrollHit[m] && pct >= m) {
+        scrollHit[m] = true;
         pushGA4('scroll_depth', { profundidade_pct: m });
-        if (m === 50 || m === 90) pixelTrack('CustomEvent', { custom_event_name: 'scroll_depth_' + m });
       }
     });
   }, { passive: true });
 
-  /* ────────────────────────────────────────────────────────────
+  /* ════════════════════════════════════════════════════════════
      3. TEMPO NA PÁGINA — 30s / 60s / 120s
-  ──────────────────────────────────────────────────────────── */
+  ════════════════════════════════════════════════════════════ */
   [{ s: 30, l: '30s' }, { s: 60, l: '60s' }, { s: 120, l: '120s' }].forEach(function(t) {
-    setTimeout(function() {
-      pushGA4('tempo_pagina', { tempo: t.l, segundos: t.s });
-      if (t.s === 60) pixelTrack('CustomEvent', { custom_event_name: 'tempo_60s_pagina' });
-    }, t.s * 1000);
+    setTimeout(function() { pushGA4('tempo_pagina', { tempo: t.l }); }, t.s * 1000);
   });
 
 })();
