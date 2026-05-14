@@ -7,43 +7,6 @@
   <title>Curso Reforma de Bíblias — Ateliê Zoê</title>
   <meta name="description" content="Aprenda a restaurar sua Bíblia Sagrada em casa com as mãos, sem máquinas caras. Curso online com a Priscila do Ateliê Zoê por apenas R$ 47,90." />
 
-  <!-- ============================================================
-       GOOGLE TAG MANAGER
-       Troque GTM-XXXXXXX pelo seu ID real (ex: GTM-AB12CD3)
-       Encontre em: tagmanager.google.com → sua conta → ID do container
-  ============================================================ -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
-
-  <!-- ============================================================
-       META PIXEL (Facebook/Instagram Ads)
-       Troque PIXEL_ID_AQUI pelo seu ID real (ex: 1234567890123456)
-       Encontre em: business.facebook.com → Gerenciador de Eventos → Pixels
-  ============================================================ -->
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','PIXEL_ID_AQUI');
-    fbq('track','PageView');
-    /* ViewContent: diz ao Pixel que o usuário viu a página do produto.
-       Cria a audiência "Visitou a oferta" para remarketing e Lookalike. */
-    fbq('track','ViewContent',{
-      content_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
-      content_type : 'product',
-      content_ids  : ['reforma-biblias-v1'],
-      value        : 47.90,
-      currency     : 'BRL'
-    });
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
-
   <!-- Fontes Google — async (não bloqueia renderização) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -295,9 +258,6 @@
 
 <body class="font-sans bg-brand-white text-brand-black antialiased">
 
-<!-- GTM noscript — obrigatório logo após <body> (fallback sem JavaScript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- ═══════════════════════════════════════════════
        BARRA DE URGÊNCIA (Topo)
@@ -1095,39 +1055,106 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <!-- ============================================================
-     RASTREAMENTO DE EVENTOS — Ateliê Zoê
-     Eventos prontos para GA4 (via GTM) + Meta Pixel.
+     RASTREAMENTO — Ateliê Zoê
+     ─────────────────────────────────────────────────────────────
+     COMO ATIVAR (só precisa trocar os 2 IDs abaixo):
 
-     ► Para ativar GA4: No GTM, crie triggers de "Custom Event"
-       usando os nomes de event abaixo. A camada de dados (dataLayer)
-       já está enviando tudo.
+     GTM_ID  → seu ID do Google Tag Manager
+                Onde achar: tagmanager.google.com → seu container
+                Formato: GTM-AB12CD3
 
-     ► Para ativar no GTM:
-       1. Acesse tagmanager.google.com
-       2. Variáveis → Nova variável de camada de dados para cada campo
-       3. Gatilhos → Evento personalizado com o nome do evento
-       4. Tags → Google Analytics 4 / Meta Pixel apontando para cada gatilho
+     PIXEL_ID → seu ID do Meta Pixel (Facebook/Instagram Ads)
+                Onde achar: business.facebook.com → Gerenciador de Eventos
+                Formato: 1234567890123456
+
+     ► Com IDs de placeholder: zero requests externos, nota 90+ preservada
+     ► Com IDs reais: GTM + Pixel carregam após load (sem impacto no LCP)
+     ─────────────────────────────────────────────────────────────
+     EVENTOS que já estão sendo capturados no dataLayer:
+       • click_cta + begin_checkout → clique em qualquer botão de compra
+       • scroll_depth (25/50/75/90%) → profundidade de leitura
+       • tempo_pagina (30s/60s/120s) → engajamento real vs bounce
+     ─────────────────────────────────────────────────────────────
+     NO GTM (após ter o ID real):
+       1. Crie Tag → GA4 → apontando para seu Measurement ID
+       2. Crie Tag → Meta Pixel → apontando para seu Pixel ID
+       3. Gatilhos: "Evento personalizado" com nome = click_cta / scroll_depth / tempo_pagina
+       4. Publique o container
 ============================================================ -->
 <script>
 (function() {
   'use strict';
 
-  /* ── dataLayer já inicializado pelo GTM, mas garantimos aqui ── */
+  /* ── IDs de rastreamento — troque aqui quando tiver os dados reais ── */
+  var GTM_ID   = 'GTM-XXXXXXX';    /* ex: GTM-AB12CD3  */
+  var PIXEL_ID = 'PIXEL_ID_AQUI';  /* ex: 1234567890123456 */
+
+  /* ── Detecta se os IDs são reais ou ainda placeholders ── */
+  var GTM_ATIVO   = GTM_ID   !== 'GTM-XXXXXXX'   && GTM_ID   !== '';
+  var PIXEL_ATIVO = PIXEL_ID !== 'PIXEL_ID_AQUI' && PIXEL_ID !== '';
+
+  /* ── dataLayer: fila de eventos — acumula mesmo antes do GTM carregar ── */
   window.dataLayer = window.dataLayer || [];
 
-  /* ── helper: push para GA4 via GTM ── */
   function pushGA4(eventName, params) {
     window.dataLayer.push(Object.assign({ event: eventName }, params || {}));
   }
 
-  /* ── helper: Meta Pixel (só dispara se o Pixel estiver carregado) ── */
   function pixelTrack(eventName, params) {
-    if (typeof fbq === 'function') { fbq('track', eventName, params || {}); }
+    if (typeof fbq === 'function') fbq('track', eventName, params || {});
   }
 
   /* ────────────────────────────────────────────────────────────
-     1. CLIQUE EM CTA — dispara InitiateCheckout + begin_checkout
-        Rastreia QUAL botão foi clicado (posição na página)
+     CARREGAR GTM + PIXEL após window.load
+     → Zero impacto no LCP / PageSpeed
+     → Eventos de CTA que acontecerem antes do load são raros
+       (usuário dificilmente clica antes de tudo carregar)
+  ──────────────────────────────────────────────────────────── */
+  window.addEventListener('load', function() {
+
+    /* ── Google Tag Manager ── */
+    if (GTM_ATIVO) {
+      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var gtmScript    = document.createElement('script');
+      gtmScript.async  = true;
+      gtmScript.src    = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+      document.head.appendChild(gtmScript);
+
+      /* noscript fallback do GTM */
+      var ns   = document.createElement('noscript');
+      var nsIf = document.createElement('iframe');
+      nsIf.src              = 'https://www.googletagmanager.com/ns.html?id=' + GTM_ID;
+      nsIf.height           = '0';
+      nsIf.width            = '0';
+      nsIf.style.cssText    = 'display:none;visibility:hidden';
+      ns.appendChild(nsIf);
+      document.body.insertBefore(ns, document.body.firstChild);
+    }
+
+    /* ── Meta Pixel ── */
+    if (PIXEL_ATIVO) {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+      fbq('init', PIXEL_ID);
+      fbq('track', 'PageView');
+      fbq('track', 'ViewContent', {
+        content_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
+        content_type : 'product',
+        content_ids  : ['reforma-biblias-v1'],
+        value        : 47.90,
+        currency     : 'BRL'
+      });
+    }
+
+  }); /* fim window.load */
+
+  /* ────────────────────────────────────────────────────────────
+     1. CLIQUE EM CTA → InitiateCheckout + begin_checkout
+        Identifica qual botão foi clicado (hero / meio / oferta_final)
   ──────────────────────────────────────────────────────────── */
   document.querySelectorAll('a[href*="hotmart.com"]').forEach(function(btn, index) {
     btn.addEventListener('click', function() {
@@ -1135,28 +1162,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   : index === 1 ? 'meio_pagina'
                   : 'oferta_final';
 
-      /* GA4 via GTM */
       pushGA4('click_cta', {
-        cta_posicao  : posicao,
-        cta_texto    : btn.textContent.trim().substring(0, 60),
-        valor        : 47.90,
-        moeda        : 'BRL',
-        produto      : 'Curso Reforma de Bíblias'
+        cta_posicao : posicao,
+        cta_texto   : btn.textContent.trim().substring(0, 60),
+        valor       : 47.90,
+        moeda       : 'BRL',
+        produto     : 'Curso Reforma de Bíblias'
       });
 
-      /* GA4 — Evento padrão de e-commerce */
       pushGA4('begin_checkout', {
         currency : 'BRL',
         value    : 47.90,
-        items    : [{
-          item_id   : 'reforma-biblias-v1',
-          item_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
-          price     : 47.90,
-          quantity  : 1
-        }]
+        items    : [{ item_id: 'reforma-biblias-v1',
+                      item_name: 'Curso Reforma de Bíblias — Ateliê Zoê',
+                      price: 47.90, quantity: 1 }]
       });
 
-      /* Meta Pixel */
       pixelTrack('InitiateCheckout', {
         content_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
         content_ids  : ['reforma-biblias-v1'],
@@ -1168,58 +1189,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 
   /* ────────────────────────────────────────────────────────────
-     2. PROFUNDIDADE DE SCROLL — 25%, 50%, 75%, 90%
-        Identifica onde as pessoas param de ler / desistem
+     2. SCROLL DEPTH — 25% / 50% / 75% / 90%
   ──────────────────────────────────────────────────────────── */
-  var scrollMarcas = [25, 50, 75, 90];
+  var scrollMarcas   = [25, 50, 75, 90];
   var scrollDisparado = {};
 
-  function onScroll() {
-    var scrolled = window.scrollY + window.innerHeight;
-    var total    = document.documentElement.scrollHeight;
-    var pct      = Math.floor((scrolled / total) * 100);
-
-    scrollMarcas.forEach(function(marca) {
-      if (!scrollDisparado[marca] && pct >= marca) {
-        scrollDisparado[marca] = true;
-
-        pushGA4('scroll_depth', { profundidade_pct: marca });
-
-        /* Meta Pixel — só para 50% e 90% (audiências mais qualificadas) */
-        if (marca === 50 || marca === 90) {
-          pixelTrack('CustomEvent', {
-            custom_event_name : 'scroll_depth_' + marca,
-            value             : marca
-          });
-        }
+  window.addEventListener('scroll', function() {
+    var pct = Math.floor(((window.scrollY + window.innerHeight) /
+                           document.documentElement.scrollHeight) * 100);
+    scrollMarcas.forEach(function(m) {
+      if (!scrollDisparado[m] && pct >= m) {
+        scrollDisparado[m] = true;
+        pushGA4('scroll_depth', { profundidade_pct: m });
+        if (m === 50 || m === 90) pixelTrack('CustomEvent', { custom_event_name: 'scroll_depth_' + m });
       }
     });
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
+  }, { passive: true });
 
   /* ────────────────────────────────────────────────────────────
-     3. TEMPO NA PÁGINA — 30s, 60s, 120s
-        Distingue bounce real de leitura pausada.
-        Cria audiências de "visitou + ficou 60s" para remarketing quente.
+     3. TEMPO NA PÁGINA — 30s / 60s / 120s
   ──────────────────────────────────────────────────────────── */
-  var tempos = [
-    { segundos: 30,  label: '30s'  },
-    { segundos: 60,  label: '60s'  },
-    { segundos: 120, label: '120s' }
-  ];
-
-  tempos.forEach(function(t) {
+  [{ s: 30, l: '30s' }, { s: 60, l: '60s' }, { s: 120, l: '120s' }].forEach(function(t) {
     setTimeout(function() {
-      pushGA4('tempo_pagina', { tempo: t.label, segundos: t.segundos });
-
-      /* Meta Pixel — 60s = audiência quente para retargeting */
-      if (t.segundos === 60) {
-        pixelTrack('CustomEvent', {
-          custom_event_name : 'tempo_60s_pagina'
-        });
-      }
-    }, t.segundos * 1000);
+      pushGA4('tempo_pagina', { tempo: t.l, segundos: t.s });
+      if (t.s === 60) pixelTrack('CustomEvent', { custom_event_name: 'tempo_60s_pagina' });
+    }, t.s * 1000);
   });
 
 })();
