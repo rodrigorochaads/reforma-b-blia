@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FF4B4B" />
+  <title>Curso Reforma de Bíblias — Ateliê Zoê</title>
+  <meta name="description" content="Aprenda a restaurar sua Bíblia Sagrada em casa com as mãos, sem máquinas caras. Curso online com a Priscila do Ateliê Zoê por apenas R$ 47,90." />
+
+  <!-- Fontes Google — async (não bloqueia renderização) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" /></noscript>
+
+  <style>
+    /* ================================================================
+       ATELIÊ ZOÊ — CSS completo (zero dependência de CDN externo)
+       Elimina script bloqueante do Tailwind CDN → 90+ no PageSpeed
+    ================================================================ */
+
+    /* Reset */
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;font-family:'Inter',system-ui,sans-serif;color:#1A1A1A;background:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    img,svg{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    ul{list-style:none;padding:0;margin:0}
+    html{scroll-behavior:smooth}
+
+    /* ── Display ── */
+    .block{display:block}
+    .inline-block{display:inline-block}
+    .flex{display:flex}
+    .grid{display:grid}
+
+    /* ── Flexbox ── */
+    .flex-col{flex-direction:column}
+    .flex-wrap{flex-wrap:wrap}
+    .flex-shrink-0{flex-shrink:0}
+    .items-center{align-items:center}
+    .items-start{align-items:flex-start}
+    .justify-center{justify-content:center}
+    .justify-between{justify-content:space-between}
+    .-space-x-2>*+*{margin-left:-0.5rem}
+
+    /* ── Gap ── */
+    .gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}
+    .gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-8{gap:2rem}
+
+    /* ── Grid ── */
+    .grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+
+    /* ── Sizing ── */
+    .w-4{width:1rem}.h-4{height:1rem}
+    .w-5{width:1.25rem}.h-5{height:1.25rem}
+    .w-8{width:2rem}.h-8{height:2rem}
+    .w-9{width:2.25rem}.h-9{height:2.25rem}
+    .w-10{width:2.5rem}.h-10{height:2.5rem}
+    .w-40{width:10rem}.h-40{height:10rem}
+    .w-48{width:12rem}
+    .w-full{width:100%}
+    .h-full{height:100%}
+    .max-w-sm{max-width:24rem}
+    .max-w-lg{max-width:32rem}
+    .max-w-xl{max-width:36rem}
+    .max-w-2xl{max-width:42rem}
+    .max-w-3xl{max-width:48rem}
+    .mx-auto{margin-left:auto;margin-right:auto}
+
+    /* ── Position ── */
+    .relative{position:relative}
+    .absolute{position:absolute}
+    .top-0{top:0}.right-0{right:0}.bottom-0{bottom:0}.left-0{left:0}
+    .overflow-hidden{overflow:hidden}
+    .object-cover{object-fit:cover}
+
+    /* ── Padding ── */
+    .p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}
+    .px-3{padding-left:.75rem;padding-right:.75rem}
+    .px-4{padding-left:1rem;padding-right:1rem}
+    .px-5{padding-left:1.25rem;padding-right:1.25rem}
+    .px-6{padding-left:1.5rem;padding-right:1.5rem}
+    .px-8{padding-left:2rem;padding-right:2rem}
+    .px-10{padding-left:2.5rem;padding-right:2.5rem}
+    .py-1{padding-top:.25rem;padding-bottom:.25rem}
+    .py-1\.5{padding-top:.375rem;padding-bottom:.375rem}
+    .py-2{padding-top:.5rem;padding-bottom:.5rem}
+    .py-2\.5{padding-top:.625rem;padding-bottom:.625rem}
+    .py-4{padding-top:1rem;padding-bottom:1rem}
+    .py-5{padding-top:1.25rem;padding-bottom:1.25rem}
+    .py-10{padding-top:2.5rem;padding-bottom:2.5rem}
+    .py-14{padding-top:3.5rem;padding-bottom:3.5rem}
+    .py-16{padding-top:4rem;padding-bottom:4rem}
+    .pt-3{padding-top:.75rem}.pt-4{padding-top:1rem}.pt-12{padding-top:3rem}
+    .pb-5{padding-bottom:1.25rem}.pb-16{padding-bottom:4rem}
+    .pl-6{padding-left:1.5rem}.pr-4{padding-right:1rem}
+
+    /* ── Margin ── */
+    .mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}
+    .mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}
+    .mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-8{margin-top:2rem}.mt-10{margin-top:2.5rem}
+    .mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}
+    .mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}
+    .mb-8{margin-bottom:2rem}.mb-10{margin-bottom:2.5rem}.mb-12{margin-bottom:3rem}
+    .my-2{margin-top:.5rem;margin-bottom:.5rem}
+    .space-y-3>*+*{margin-top:.75rem}
+
+    /* ── Typography ── */
+    .font-sans{font-family:'Inter',system-ui,sans-serif}
+    .font-serif{font-family:'Playfair Display',Georgia,serif}
+    .font-normal{font-weight:400}
+    .font-light{font-weight:300}
+    .font-medium{font-weight:500}
+    .font-semibold{font-weight:600}
+    .font-bold{font-weight:700}
+    .text-xs{font-size:.75rem;line-height:1rem}
+    .text-sm{font-size:.875rem;line-height:1.25rem}
+    .text-lg{font-size:1.125rem;line-height:1.75rem}
+    .text-xl{font-size:1.25rem;line-height:1.75rem}
+    .text-2xl{font-size:1.5rem;line-height:2rem}
+    .text-3xl{font-size:1.875rem;line-height:2.25rem}
+    .text-4xl{font-size:2.25rem;line-height:2.5rem}
+    .text-center{text-align:center}
+    .text-left{text-align:left}
+    .leading-tight{line-height:1.25}
+    .leading-snug{line-height:1.375}
+    .leading-relaxed{line-height:1.625}
+    .tracking-wide{letter-spacing:.025em}
+    .tracking-widest{letter-spacing:.1em}
+    .uppercase{text-transform:uppercase}
+    .italic{font-style:italic}
+    .line-through{text-decoration:line-through}
+    .select-none{user-select:none}
+    .antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+    /* ── Cores — Texto ── */
+    .text-white{color:#fff}
+    .text-gray-300{color:#d1d5db}
+    .text-gray-400{color:#9ca3af}
+    .text-gray-500{color:#6b7280}
+    .text-gray-600{color:#4b5563}
+    .text-gray-700{color:#374151}
+    .text-yellow-400{color:#facc15}
+    .text-green-400{color:#4ade80}
+    .text-brand-red{color:#FF4B4B}
+    .text-brand-black{color:#1A1A1A}
+
+    /* ── Cores — Background ── */
+    .bg-white{background-color:#fff}
+    .bg-brand-white{background-color:#fff}
+    .bg-brand-black{background-color:#1A1A1A}
+    .bg-brand-red{background-color:#FF4B4B}
+    .bg-brand-muted{background-color:#F7F7F7}
+    .bg-brand-light{background-color:#FFF5F5}
+    .bg-\[\#FFD6D6\]{background-color:#FFD6D6}
+    .bg-\[\#FECACA\]{background-color:#FECACA}
+    .bg-\[\#FCA5A5\]{background-color:#FCA5A5}
+    .bg-brand-red\/10{background-color:rgba(255,75,75,.1)}
+    .bg-brand-red\/20{background-color:rgba(255,75,75,.2)}
+    .bg-white\/5{background-color:rgba(255,255,255,.05)}
+    .bg-white\/10{background-color:rgba(255,255,255,.1)}
+
+    /* ── Gradiente overlay (hero image) ── */
+    .bg-gradient-to-t.from-black\/60{background-image:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
+
+    /* ── Cores — Borda ── */
+    .border-brand-border{border-color:#E8E8E8}
+    .border-brand-red\/10{border-color:rgba(255,75,75,.1)}
+    .border-brand-red\/20{border-color:rgba(255,75,75,.2)}
+    .border-brand-red\/30{border-color:rgba(255,75,75,.3)}
+    .border-brand-red\/40{border-color:rgba(255,75,75,.4)}
+    .border-white\/10{border-color:rgba(255,255,255,.1)}
+    .border-white{border-color:#fff}
+
+    /* ── Bordas ── */
+    .border{border-width:1px;border-style:solid}
+    .border-b{border-bottom-width:1px;border-bottom-style:solid}
+    .border-t{border-top-width:1px;border-top-style:solid}
+    .border-2{border-width:2px;border-style:solid}
+    .border-4{border-width:4px;border-style:solid}
+    .rounded-full{border-radius:9999px}
+    .rounded-xl{border-radius:.75rem}
+    .rounded-2xl{border-radius:1rem}
+    .rounded-bl-xl{border-bottom-left-radius:.75rem}
+
+    /* ── Ring (destaque módulo 12) ── */
+    .ring-2.ring-brand-red\/20{box-shadow:0 4px 24px rgba(26,26,26,.08),0 0 0 2px rgba(255,75,75,.2)}
+
+    /* ── Sombras ── */
+    .shadow-md{box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+    .shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+    .shadow-xl{box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1)}
+
+    /* ── Opacidade ── */
+    .opacity-75{opacity:.75}
+
+    /* ── Transições ── */
+    .transition-colors{transition:color .15s cubic-bezier(.4,0,.2,1),background-color .15s cubic-bezier(.4,0,.2,1),border-color .15s cubic-bezier(.4,0,.2,1)}
+    .duration-200{transition-duration:.2s}
+
+    /* ── Hover ── */
+    .hover\:bg-red-600:hover{background-color:#dc2626}
+    .hover\:bg-red-500:hover{background-color:#ef4444}
+    .hover\:text-gray-400:hover{color:#9ca3af}
+
+    /* ── Cursor ── */
+    .cursor-pointer{cursor:pointer}
+
+    /* ================================================================
+       Componentes customizados da marca
+    ================================================================ */
+
+    /* Pulso no CTA */
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(255, 75, 75, 0.45); }
+      70%  { box-shadow: 0 0 0 14px rgba(255, 75, 75, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 75, 75, 0); }
+    }
+    .btn-pulse{animation:pulse-ring 2s infinite}
+
+    /* Linha decorativa */
+    .title-underline::after{content:'';display:block;width:56px;height:3px;background:#FF4B4B;margin:12px auto 0;border-radius:2px}
+
+    /* Gradiente hero */
+    .hero-gradient{background:linear-gradient(160deg,#fff 0%,#FFF5F5 60%,#FFE8E8 100%)}
+
+    /* Cards */
+    .card-shadow{box-shadow:0 4px 24px rgba(26,26,26,.08)}
+    .card-shadow:hover{box-shadow:0 8px 32px rgba(255,75,75,.15);transform:translateY(-2px);transition:all .25s ease}
+
+    /* Preço riscado */
+    .price-old{text-decoration:line-through;opacity:.6}
+
+    /* FAQ accordion */
+    details>summary{list-style:none}
+    details>summary::-webkit-details-marker{display:none}
+    details[open] summary .faq-icon{transform:rotate(45deg)}
+    .faq-icon{transition:transform .2s ease}
+
+    /* Garantia */
+    .guarantee-box{border:2px dashed #FF4B4B}
+
+    /* ================================================================
+       Responsivo — breakpoint sm (≥ 640px)
+    ================================================================ */
+    @media(min-width:640px){
+      .sm\:text-xl{font-size:1.25rem;line-height:1.75rem}
+      .sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}
+      .sm\:text-5xl{font-size:3rem;line-height:1}
+      .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .sm\:flex-row{flex-direction:row}
+      .sm\:w-auto{width:auto}
+      .sm\:items-start{align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body class="font-sans bg-brand-white text-brand-black antialiased">
+
+
+  <!-- ═══════════════════════════════════════════════
+       BARRA DE URGÊNCIA (Topo)
+  ═══════════════════════════════════════════════ -->
+  <div class="bg-brand-red text-white text-center py-2.5 px-4 text-sm font-medium">
+    ✨ Acesso imediato — De <span class="line-through opacity-75">R$ 97,00</span> por apenas <strong>R$ 47,90</strong> · Garantia de 7 dias
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════════ -->
+  <header class="bg-white border-b border-brand-border py-4 px-6 flex items-center justify-center">
+    <div class="flex items-center gap-3">
+      <!-- Logo mark simples -->
+      <div class="w-9 h-9 bg-brand-red rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      </div>
+      <span class="font-serif text-xl font-bold text-brand-black tracking-wide">Ateliê Zoê</span>
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 1 — HERO
+  ═══════════════════════════════════════════════ -->
+  <section class="hero-gradient pt-12 pb-16 px-5 text-center">
+    <div class="max-w-2xl mx-auto">
+
+      <!-- Etiqueta -->
+      <span class="inline-block bg-brand-red/10 text-brand-red text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6">
+        Curso Online — Acesso Imediato
+      </span>
+
+      <!-- Headline -->
+      <h1 class="font-serif text-4xl sm:text-5xl font-bold leading-tight text-brand-black mb-5">
+        Dê uma nova vida à<br />
+        <span class="text-brand-red">sua Bíblia Sagrada</span>
+      </h1>
+
+      <!-- Sub-headline -->
+      <p class="text-lg sm:text-xl text-gray-600 leading-relaxed mb-8 max-w-xl mx-auto">
+        Aprenda a <strong>eternizar memórias</strong> com as próprias mãos — restaurando a Bíblia carregada de afeto que você ama, sem máquinas caras e sem sair de casa.
+      </p>
+
+      <!-- Antes e depois real — aluna Thaís -->
+      <div class="relative mx-auto mb-8 max-w-lg rounded-2xl overflow-hidden shadow-xl border-4 border-white" style="height:340px;">
+        <!-- Labels centralizados sobre cada metade -->
+        <div style="position:absolute;top:.75rem;left:0;right:0;display:flex;z-index:10;pointer-events:none;">
+          <div style="width:50%;display:flex;justify-content:center;">
+            <span style="background:rgba(26,26,26,0.78);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.09em;padding:.28rem .85rem;border-radius:9999px;text-transform:uppercase;">ANTES</span>
+          </div>
+          <div style="width:50%;display:flex;justify-content:center;">
+            <span style="background:rgba(255,75,75,0.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.09em;padding:.28rem .85rem;border-radius:9999px;text-transform:uppercase;">DEPOIS</span>
+          </div>
+        </div>
+        <img
+          src="antes-depois.jpeg"
+          alt="Antes e depois da reforma da Bíblia — aluna Thaís"
+          style="width:100%;height:100%;object-fit:cover;object-position:center 28%;"
+          width="900" height="540"
+          loading="eager" fetchpriority="high"
+        />
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent py-4 px-5 text-white text-sm font-medium">
+          ✨ Resultado real — aluna Thaís, feito 100% em casa
+        </div>
+      </div>
+
+      <!-- Preço -->
+      <div class="mb-8">
+        <p class="text-gray-400 text-sm mb-1 price-old">De R$ 97,00</p>
+        <p class="text-brand-black text-2xl font-bold">
+          Por apenas <span class="text-brand-red text-4xl">R$ 47,90</span>
+        </p>
+        <p class="text-brand-black font-semibold text-sm mt-1">ou 6x de R$ 8,99 <span class="text-gray-400 font-normal">(com juros)</span></p>
+        <p class="text-gray-500 text-xs mt-1">Acesso por 1 ano</p>
+      </div>
+
+      <!-- CTA principal -->
+      <a
+        href="https://pay.hotmart.com/B79586517T?checkoutMode=0" target="_blank" rel="noopener"
+        class="btn-pulse inline-block bg-brand-red text-white font-bold text-lg px-10 py-5 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-200 w-full sm:w-auto"
+      >
+        ✅ Quero aprender a restaurar minha Bíblia
+      </a>
+
+      <p class="text-gray-400 text-xs mt-4">🔒 Compra segura • Garantia de 7 dias</p>
+
+      <!-- Prova social rápida — sem avatares falsos -->
+      <div class="flex items-center justify-center gap-3 mt-10 flex-wrap">
+        <div class="flex items-center gap-2 bg-white/10 backdrop-blur rounded-full px-5 py-2.5 border border-white/20">
+          <span class="text-xl">⭐⭐⭐⭐⭐</span>
+          <p class="text-white text-sm">
+            <span class="font-bold">+5.000 alunas</span> já restauraram as suas Bíblias
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 2 — SEÇÃO DE DOR
+  ═══════════════════════════════════════════════ -->
+  <section class="bg-brand-black text-white py-14 px-5">
+    <div class="max-w-2xl mx-auto text-center">
+
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-6 leading-snug">
+        Sua Bíblia está assim?
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 text-left">
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+          <div class="text-3xl mb-3">📖</div>
+          <h3 class="font-bold text-brand-red mb-2">Capa descascando</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            O couro sintético soltando, a capa dura descolando, e a aparência que não faz mais jus à importância da Bíblia.
+          </p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+          <div class="text-3xl mb-3">📃</div>
+          <h3 class="font-bold text-brand-red mb-2">Páginas soltas</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Folhas caindo no meio do culto ou do devocional. Aquelas anotações preciosas em risco de se perderem para sempre.
+          </p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+          <div class="text-3xl mb-3">💔</div>
+          <h3 class="font-bold text-brand-red mb-2">Bíblia Torta</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            A bíblia não fecha mais direito e a lombada está totalmente descolada da capa.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="bg-brand-red/20 border border-brand-red/40 rounded-2xl p-6">
+        <p class="text-xl font-serif font-semibold leading-relaxed">
+          "Não compre uma nova.<br />
+          <span class="text-brand-red font-bold">Restaure a sua.</span>"
+        </p>
+        <p class="text-gray-300 text-sm mt-3">
+          Aquela Bíblia tem a sua letra nas margens, os versículos que te sustentaram, as marcas de lágrimas e fé. Ela tem uma história que nenhuma Bíblia nova pode substituir.
+        </p>
+      </div>
+
+      <!-- Gatilho emocional: Bíblia da vovó -->
+      <div class="mt-5 bg-white/5 border border-white/10 rounded-2xl p-6 text-left flex gap-4 items-start">
+        <div class="text-3xl flex-shrink-0">👵🏾</div>
+        <div>
+          <p class="font-semibold text-white text-sm mb-1">E a Bíblia da sua mãe? Da sua avó?</p>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Algumas Bíblias chegam ao ateliê <em>"carregadas de afeto — um laço cheio de amor entre neta e avó"</em>. Restaurar não é só consertar uma capa. É eternizar uma memória.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 2.5 — PARA QUEM É ESSE CURSO?
+  ═══════════════════════════════════════════════ -->
+  <section class="bg-white py-14 px-5">
+    <div class="max-w-2xl mx-auto">
+
+      <div class="text-center mb-10">
+        <span class="text-brand-red text-xs font-semibold tracking-widest uppercase">Isso é para você?</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-3 title-underline">
+          Esse curso é para você se...
+        </h2>
+      </div>
+
+      <div class="space-y-3">
+
+        <div class="flex items-start gap-4 bg-brand-light rounded-xl p-4 border border-brand-red/10">
+          <span class="text-brand-red font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+          <p class="text-brand-black text-sm leading-relaxed">Você tem uma Bíblia com capa solta, miolo torto ou páginas soltas — e não quer substituí-la porque ela guarda sua história de fé</p>
+        </div>
+
+        <div class="flex items-start gap-4 bg-brand-light rounded-xl p-4 border border-brand-red/10">
+          <span class="text-brand-red font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+          <p class="text-brand-black text-sm leading-relaxed">Você quer aprender do zero, sem precisar de equipamentos caros e sem nenhuma experiência prévia com artesanato</p>
+        </div>
+
+        <div class="flex items-start gap-4 bg-brand-light rounded-xl p-4 border border-brand-red/10">
+          <span class="text-brand-red font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+          <p class="text-brand-black text-sm leading-relaxed">Você sonha em dar um presente inesquecível — a Bíblia da sua mãe, da sua avó ou da sua pastora — restaurada com carinho, técnica e propósito</p>
+        </div>
+
+        <div class="flex items-start gap-4 bg-brand-light rounded-xl p-4 border border-brand-red/10">
+          <span class="text-brand-red font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+          <p class="text-brand-black text-sm leading-relaxed">Você quer gerar renda extra trabalhando em casa, no seu tempo, com algo que tem significado espiritual e impacto real na vida de quem recebe</p>
+        </div>
+
+        <div class="flex items-start gap-4 bg-brand-light rounded-xl p-4 border border-brand-red/10">
+          <span class="text-brand-red font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+          <p class="text-brand-black text-sm leading-relaxed">Você não tem muito tempo livre — mas quer um curso que possa assistir no seu ritmo, quando a casa estiver quieta, sem prazo para terminar</p>
+        </div>
+
+        <div class="flex items-start gap-4 bg-brand-light rounded-xl p-4 border border-brand-red/10">
+          <span class="text-brand-red font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+          <p class="text-brand-black text-sm leading-relaxed">Você sente que Deus colocou em seu coração o dom de criar — e quer transformar esse dom em algo belo, útil e que gera fruto</p>
+        </div>
+
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="https://pay.hotmart.com/B79586517T?checkoutMode=0" target="_blank" rel="noopener"
+           class="inline-block bg-brand-red text-white font-semibold px-10 py-4 rounded-full hover:bg-red-600 transition-colors shadow-md">
+          Sim, esse curso é para mim →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 3 — O QUE VOCÊ VAI APRENDER (MÓDULOS)
+  ═══════════════════════════════════════════════ -->
+  <section class="bg-brand-muted py-16 px-5">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="text-center mb-12">
+        <span class="text-brand-red text-xs font-semibold tracking-widest uppercase">Conteúdo do curso</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-3 mb-2 title-underline">
+          O que você vai aprender
+        </h2>
+        <p class="text-gray-500 mt-5 max-w-lg mx-auto">
+          Mais de 20 módulos em passo a passo artesanal, filmado de perto, para você acompanhar cada detalhe com clareza — mesmo nunca tendo feito isso antes.
+        </p>
+      </div>
+
+      <!-- Grade de 12 módulos reais com benefícios -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">01</span>
+            <span class="text-brand-black text-sm font-semibold">Principais materiais</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">O que comprar, o que NÃO precisa comprar — e como gastar pouco para começar</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">02</span>
+            <span class="text-brand-black text-sm font-semibold">Estruturação do miolo</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Reforce e recupere sem danificar o miolo</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">03</span>
+            <span class="text-brand-black text-sm font-semibold">Capas com courino e cantoneiras</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">A técnica mais procurada — acabamento de ateliê profissional em casa</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">04</span>
+            <span class="text-brand-black text-sm font-semibold">Técnicas com tecido</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Como trabalhar com diferentes estampas e tipos de tecido com acabamento impecável</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">05</span>
+            <span class="text-brand-black text-sm font-semibold">Laminação a frio sem laminadora</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Faça capas impressas com laminação a frio, sem necessidade de laminadora</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">06</span>
+            <span class="text-brand-black text-sm font-semibold">Gabarito para abas adesivas</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Aprenda a aplicar abas adesivas de forma uniforme, sem erro para todos os tamanhos de bíblia</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">07</span>
+            <span class="text-brand-black text-sm font-semibold">Efeito alto relevo</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">O acabamento premium que faz a Bíblia parecer de vitrine de loja especializada</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">08</span>
+            <span class="text-brand-black text-sm font-semibold">Duas texturas sofisticadas</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Combine materiais e crie Bíblias únicas com visual de alto valor percebido</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">09</span>
+            <span class="text-brand-black text-sm font-semibold">Edição de arquivos gratuita</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Crie e personalize artes para capas usando ferramentas 100% gratuitas</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">10</span>
+            <span class="text-brand-black text-sm font-semibold">Lombada exposta para tamanhos variados</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Faça lombada exposta de forma correta, sem fitas adesivas que descolam com o tempo — aprenda usar o material correto para longa durabilidade</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">11</span>
+            <span class="text-brand-black text-sm font-semibold">Capas personalizadas e flexíveis</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Crie uma obra única — personalizada do zero, que quem recebe vai guardar para sempre</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">12</span>
+            <span class="text-brand-black text-sm font-semibold">Capas impressas com Emenda</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Aprenda a criar sua arte do zero e emendar folha A4 corretamente para Bíblias maiores</p>
+        </div>
+
+        <div class="bg-white rounded-xl px-5 py-4 card-shadow border border-brand-border ring-2 ring-brand-red/20">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="text-brand-red font-bold text-xs flex-shrink-0">+</span>
+            <span class="text-brand-black text-sm font-semibold">Pintura lateral + muito mais</span>
+          </div>
+          <p class="text-gray-400 text-xs pl-6">Dê acabamento profissional nas laterais das páginas — e acesse mais de 20 módulos que cobrem todas as dúvidas recorrentes ✨</p>
+        </div>
+
+      </div>
+
+      <!-- Mini CTA dentro da seção -->
+      <div class="text-center mt-10">
+        <a href="https://pay.hotmart.com/B79586517T?checkoutMode=0" target="_blank" rel="noopener" class="inline-block bg-brand-red text-white font-semibold px-8 py-4 rounded-full hover:bg-red-600 transition-colors">
+          Quero acessar os +20 módulos →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 4 — BÔNUS EXCLUSIVOS
+  ═══════════════════════════════════════════════ -->
+  <section class="bg-white py-16 px-5">
+    <div class="max-w-2xl mx-auto">
+
+      <div class="text-center mb-10">
+        <span class="text-brand-red text-xs font-semibold tracking-widest uppercase">Surpresa pra você</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-3 mb-2 title-underline">
+          Bônus Exclusivos
+        </h2>
+        <p class="text-gray-500 mt-5">Incluídos no curso, sem custo adicional.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+
+        <!-- Bônus 1 -->
+        <div class="border border-brand-border rounded-2xl p-6 relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-bl-xl">BÔNUS</div>
+          <div class="text-4xl mb-4">🛒</div>
+          <h3 class="font-serif text-lg font-bold mb-2">Dicas de Fornecedores</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Lista com os fornecedores que a Priscila usa — onde comprar material de qualidade gastando pouco, sem garimpar na internet.
+          </p>
+          <p class="text-brand-red font-bold text-sm mt-4">✓ Incluso — <span class="line-through text-gray-400 font-normal">R$ 47,00</span> grátis</p>
+        </div>
+
+        <!-- Bônus 2 -->
+        <div class="border border-brand-border rounded-2xl p-6 relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-bl-xl">BÔNUS</div>
+          <div class="text-4xl mb-4">📊</div>
+          <h3 class="font-serif text-lg font-bold mb-2">Módulo de Precificação</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Aprenda a calcular custos, mão de obra e lucro. Ideal para quem quer transformar a técnica em renda extra — cobrar certo desde o início.
+          </p>
+          <p class="text-brand-red font-bold text-sm mt-4">✓ Incluso — <span class="line-through text-gray-400 font-normal">R$ 67,00</span> grátis</p>
+        </div>
+
+        <!-- Bônus 3 -->
+        <div class="border border-brand-border rounded-2xl p-6 relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-bl-xl">BÔNUS</div>
+          <div class="text-4xl mb-4">🎁</div>
+          <h3 class="font-serif text-lg font-bold mb-2">Entrega Encantável</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Como embalar e entregar com capricho para fidelizar clientes. O acabamento que transforma uma venda em uma experiência inesquecível.
+          </p>
+          <p class="text-brand-red font-bold text-sm mt-4">✓ Incluso — <span class="line-through text-gray-400 font-normal">R$ 37,00</span> grátis</p>
+        </div>
+
+      </div>
+
+      <!-- Resumo de valor total -->
+      <div class="mt-8 bg-brand-light rounded-2xl p-6 text-center border border-brand-red/20">
+        <p class="text-gray-600 text-sm mb-2">Tudo isso por:</p>
+        <div class="flex flex-col items-center gap-1">
+          <span class="text-gray-500 text-sm">+20 módulos do curso …………… R$ 97,00</span>
+          <span class="text-gray-500 text-sm">Bônus — Dicas de Fornecedores … <span class="line-through">R$ 47,00</span></span>
+          <span class="text-gray-500 text-sm">Bônus — Módulo Precificação ……… <span class="line-through">R$ 67,00</span></span>
+          <span class="text-gray-500 text-sm">Bônus — Entrega Encantável ………… <span class="line-through">R$ 37,00</span></span>
+          <div class="border-t border-brand-border w-48 my-2"></div>
+          <span class="text-gray-400 text-xs">Valor total: <span class="line-through">R$ 248,00</span></span>
+          <p class="font-bold text-brand-black">Hoje por apenas: <span class="text-brand-red text-2xl font-serif">R$ 47,90</span></p>
+          <p class="text-gray-500 text-sm mt-0.5">ou 6x de R$ 8,99 com juros</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 5 — SOBRE A PRISCILA
+  ═══════════════════════════════════════════════ -->
+  <section class="bg-brand-muted py-16 px-5">
+    <div class="max-w-2xl mx-auto">
+
+      <div class="text-center mb-10">
+        <span class="text-brand-red text-xs font-semibold tracking-widest uppercase">Quem vai te ensinar</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-3 title-underline">
+          Conheça a Priscila
+        </h2>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 card-shadow flex flex-col sm:flex-row gap-8 items-center sm:items-start">
+
+        <!-- Foto -->
+        <div class="flex-shrink-0">
+          <img
+            src="priscila.jpg"
+            alt="Priscila Sales — Fundadora do Ateliê Zoê"
+            class="w-40 h-40 rounded-full object-cover border-4 border-brand-red/20 shadow-md"
+            style="object-position: center 18%;"
+            width="180" height="180" loading="lazy"
+          />
+        </div>
+
+        <!-- Bio -->
+        <div>
+          <h3 class="font-serif text-2xl font-bold mb-1">Priscila Sales</h3>
+          <p class="text-brand-red text-sm font-semibold mb-4">Fundadora do Ateliê Zoê • "Cristo, Papel e Propósito 🤎"</p>
+          <p class="text-gray-600 leading-relaxed text-sm mb-3">
+            Priscila é Engenheira Florestal e Doutora em Ciências Florestais — e largou a carreira acadêmica depois do nascimento da filha para seguir um chamado: empreender com as mãos e com fé.
+          </p>
+          <p class="text-gray-600 leading-relaxed text-sm mb-3">
+            Do ateliê nasceu uma missão: não apenas restaurar capas, mas <strong>eternizar memórias</strong>. Cada detalhe da encadernação é pensado para traduzir sentimentos profundos, como só a Bíblia Sagrada é capaz de guardar.
+          </p>
+          <p class="text-gray-600 leading-relaxed text-sm">
+            Hoje, com mais de 5.000 alunos formados, ela ensina do zero — pensando especialmente em mães, artesãs e mulheres de fé que querem transformar vidas através da encadernação com propósito.
+          </p>
+
+          <!-- Credenciais rápidas -->
+          <div class="flex flex-wrap gap-3 mt-5">
+            <span class="bg-brand-light text-brand-red text-xs font-semibold px-3 py-1.5 rounded-full border border-brand-red/20">+5.000 alunos formados</span>
+            <span class="bg-brand-light text-brand-red text-xs font-semibold px-3 py-1.5 rounded-full border border-brand-red/20">Doutora em Ciências Florestais</span>
+            <span class="bg-brand-light text-brand-red text-xs font-semibold px-3 py-1.5 rounded-full border border-brand-red/20">Ateliê Zoê</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 6 — DEPOIMENTOS (Social Proof)
+  ═══════════════════════════════════════════════ -->
+  <section class="bg-white py-16 px-5">
+    <div class="max-w-2xl mx-auto">
+
+      <div class="text-center mb-10">
+        <span class="text-brand-red text-xs font-semibold tracking-widest uppercase">O que dizem as alunas</span>
+        <h2 class="font-serif text-3xl font-bold mt-3 title-underline">
+          Resultados reais
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+        <!-- Depoimento 1 — real (@thais.schuh) -->
+        <div class="bg-brand-muted rounded-2xl p-6 border border-brand-border">
+          <div class="flex items-center gap-1 text-yellow-400 mb-3">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed italic mb-4">
+            "Melhor curso! Foi uma resposta de Deus pra minha vida e até hoje tem sido uma benção. ❤️"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-sm flex-shrink-0">T</div>
+            <div>
+              <p class="font-semibold text-brand-black text-sm">Thais S.</p>
+              <p class="text-gray-400 text-xs">Aluna do curso</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Depoimento 2 — real (@missionariaadrisouza) -->
+        <div class="bg-brand-muted rounded-2xl p-6 border border-brand-border">
+          <div class="flex items-center gap-1 text-yellow-400 mb-3">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed italic mb-4">
+            "Esse curso é espetacular ❤️ Um divisor de águas na minha vida!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-sm flex-shrink-0">A</div>
+            <div>
+              <p class="font-semibold text-brand-black text-sm">Adriana S.</p>
+              <p class="text-gray-400 text-xs">Aluna do curso</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Depoimento 3 — real (@atelielilianpimenteloficial) -->
+        <div class="bg-brand-muted rounded-2xl p-6 border border-brand-border">
+          <div class="flex items-center gap-1 text-yellow-400 mb-3">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed italic mb-4">
+            "É um curso muito completo, não deixou a desejar em nada! Tudo de forma simplificada — mesmo quem não tem muitas condições financeiras consegue iniciar com facilidade e qualidade!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-sm flex-shrink-0">L</div>
+            <div>
+              <p class="font-semibold text-brand-black text-sm">Lilian P.</p>
+              <p class="text-gray-400 text-xs">Aluna do curso</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Depoimento 4 — real (@cri_andocomproposito) -->
+        <div class="bg-brand-muted rounded-2xl p-6 border border-brand-border">
+          <div class="flex items-center gap-1 text-yellow-400 mb-3">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed italic mb-4">
+            "O curso do Ateliê Zoê foi resposta de oração pra minha vida. Transformou minha história. Que Deus continue te abençoando, Priscila! ❤️"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-sm flex-shrink-0">C</div>
+            <div>
+              <p class="font-semibold text-brand-black text-sm">Cristiane</p>
+              <p class="text-gray-400 text-xs">Aluna do curso</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 7 — FAQ
+  ═══════════════════════════════════════════════ -->
+  <section class="bg-brand-muted py-16 px-5">
+    <div class="max-w-2xl mx-auto">
+
+      <div class="text-center mb-10">
+        <span class="text-brand-red text-xs font-semibold tracking-widest uppercase">Dúvidas frequentes</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-3 title-underline">
+          Perguntas & Respostas
+        </h2>
+      </div>
+
+      <div class="space-y-3">
+
+        <details class="bg-white border border-brand-border rounded-2xl group">
+          <summary class="flex items-center justify-between p-5 cursor-pointer select-none">
+            <span class="font-semibold text-brand-black pr-4">Tem conteúdo gratuito no YouTube. Por que eu pagaria por esse curso?</span>
+            <span class="faq-icon text-brand-red text-2xl font-light flex-shrink-0">+</span>
+          </summary>
+          <p class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-brand-border pt-4 mt-0">
+            O YouTube tem vídeos soltos — mas não tem metodologia, ordem lógica, suporte nem comunidade. No curso da Priscila você segue um caminho estruturado do zero ao acabamento profissional, com 12 módulos em progressão, bônus exclusivos e a segurança de poder tirar dúvidas. É a diferença entre um mapa e um GPS.
+          </p>
+        </details>
+
+        <details class="bg-white border border-brand-border rounded-2xl group">
+          <summary class="flex items-center justify-between p-5 cursor-pointer select-none">
+            <span class="font-semibold text-brand-black pr-4">Nunca fiz artesanato na vida. Tenho jeito para isso?</span>
+            <span class="faq-icon text-brand-red text-2xl font-light flex-shrink-0">+</span>
+          </summary>
+          <p class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-brand-border pt-4 mt-0">
+            Esse é exatamente o perfil de quem a Priscila ensina. O curso começa do absoluto zero — sem assumir nenhum conhecimento prévio. As aulas são filmadas de perto para você ver cada detalhe da mão dela. Mais de 5.000 alunas que "nunca tinham feito nada" hoje produzem resultados que impressionam.
+          </p>
+        </details>
+
+        <details class="bg-white border border-brand-border rounded-2xl group">
+          <summary class="flex items-center justify-between p-5 cursor-pointer select-none">
+            <span class="font-semibold text-brand-black pr-4">Não tenho muito tempo. Consigo acompanhar com a rotina de casa e filhos?</span>
+            <span class="faq-icon text-brand-red text-2xl font-light flex-shrink-0">+</span>
+          </summary>
+          <p class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-brand-border pt-4 mt-0">
+            Sim! O curso é 100% assíncrono — você assiste quando quiser, no ritmo que der, pelo celular mesmo. Não existe horário fixo nem aula ao vivo. Muitas alunas avançam nos momentos de silêncio da casa, às noites ou nos fins de semana. O acesso é seu por 1 ano inteiro.
+          </p>
+        </details>
+
+        <details class="bg-white border border-brand-border rounded-2xl group">
+          <summary class="flex items-center justify-between p-5 cursor-pointer select-none">
+            <span class="font-semibold text-brand-black pr-4">Preciso de máquinas caras ou ferramentas especiais?</span>
+            <span class="faq-icon text-brand-red text-2xl font-light flex-shrink-0">+</span>
+          </summary>
+          <p class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-brand-border pt-4 mt-0">
+            Não. O curso foi desenvolvido exatamente para quem não tem equipamentos — sem impressora especial, sem laminadora, sem nada caro. Você começa com itens simples (tesoura, cola, régua) e o bônus de fornecedores mostra onde comprar o restante gastando pouco.
+          </p>
+        </details>
+
+        <details class="bg-white border border-brand-border rounded-2xl group">
+          <summary class="flex items-center justify-between p-5 cursor-pointer select-none">
+            <span class="font-semibold text-brand-black pr-4">Será que isso é para mim? E se eu não tiver o dom?</span>
+            <span class="faq-icon text-brand-red text-2xl font-light flex-shrink-0">+</span>
+          </summary>
+          <p class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-brand-border pt-4 mt-0">
+            O dom se revela na prática — e o primeiro passo é aprender a técnica certa. A Priscila acredita que cuidar da Palavra de Deus com as próprias mãos é um ato de fé disponível para qualquer pessoa. Você não precisa de talento inato: precisa de método, vontade e a Palavra que vale a pena preservar.
+          </p>
+        </details>
+
+        <details class="bg-white border border-brand-border rounded-2xl group">
+          <summary class="flex items-center justify-between p-5 cursor-pointer select-none">
+            <span class="font-semibold text-brand-black pr-4">Por quanto tempo tenho acesso? E se eu não terminar no prazo?</span>
+            <span class="faq-icon text-brand-red text-2xl font-light flex-shrink-0">+</span>
+          </summary>
+          <p class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-brand-border pt-4 mt-0">
+            Você tem acesso por 1 ano completo a partir da data da compra. É tempo mais que suficiente para assistir, praticar, rever e dominar cada técnica no seu ritmo.
+          </p>
+        </details>
+
+        <details class="bg-white border border-brand-border rounded-2xl group">
+          <summary class="flex items-center justify-between p-5 cursor-pointer select-none">
+            <span class="font-semibold text-brand-black pr-4">E se eu não gostar? Tem garantia?</span>
+            <span class="faq-icon text-brand-red text-2xl font-light flex-shrink-0">+</span>
+          </summary>
+          <p class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-brand-border pt-4 mt-0">
+            Sim, garantia incondicional de 7 dias. Se por qualquer motivo você não ficar satisfeito(a), é só enviar um e-mail e devolvemos 100% do seu investimento — sem perguntas, sem burocracia. O risco é zero.
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       SEÇÃO 8 — OFERTA FINAL + CTA (âncora #oferta)
+  ═══════════════════════════════════════════════ -->
+  <section id="oferta" class="bg-brand-black text-white py-16 px-5">
+    <div class="max-w-xl mx-auto text-center">
+
+      <span class="inline-block bg-brand-red/20 text-brand-red text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 border border-brand-red/30">
+        Acesso disponível agora
+      </span>
+
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-6 leading-snug">
+        Sua Bíblia restaurada,<br />sua história preservada.
+      </h2>
+
+      <!-- Resumo do que está incluído -->
+      <ul class="text-left space-y-3 mb-8 max-w-sm mx-auto">
+        <li class="flex items-start gap-3 text-sm">
+          <span class="text-green-400 font-bold mt-0.5">✓</span>
+          <span>+20 módulos completos — do zero ao acabamento profissional</span>
+        </li>
+        <li class="flex items-start gap-3 text-sm">
+          <span class="text-green-400 font-bold mt-0.5">✓</span>
+          <span>Técnicas sem impressora, sem laminadora, gastando pouco</span>
+        </li>
+        <li class="flex items-start gap-3 text-sm">
+          <span class="text-green-400 font-bold mt-0.5">✓</span>
+          <span>Acesso por 1 ano — assista quando e onde quiser</span>
+        </li>
+        <li class="flex items-start gap-3 text-sm border-t border-white/10 pt-3 mt-1">
+          <span class="text-yellow-400 font-bold mt-0.5">★</span>
+          <span><strong>Bônus:</strong> Dicas de Fornecedores</span>
+        </li>
+        <li class="flex items-start gap-3 text-sm">
+          <span class="text-yellow-400 font-bold mt-0.5">★</span>
+          <span><strong>Bônus:</strong> Módulo de Precificação</span>
+        </li>
+        <li class="flex items-start gap-3 text-sm">
+          <span class="text-yellow-400 font-bold mt-0.5">★</span>
+          <span><strong>Bônus:</strong> Entrega Encantável</span>
+        </li>
+      </ul>
+
+      <!-- Preço -->
+      <div class="mb-8">
+        <p class="text-gray-400 text-sm price-old mb-1">De R$ 97,00</p>
+        <p class="text-4xl font-serif font-bold text-brand-red">R$ 47,90</p>
+        <p class="text-white font-semibold text-sm mt-1">ou 6x de R$ 8,99 <span class="text-gray-400 font-normal">(com juros)</span></p>
+      </div>
+
+      <!-- CTA principal -->
+      <a
+        href="https://pay.hotmart.com/B79586517T?checkoutMode=0"
+        target="_blank"
+        rel="noopener"
+        class="btn-pulse inline-block bg-brand-red text-white font-bold text-lg px-10 py-5 rounded-full shadow-lg hover:bg-red-500 transition-colors duration-200 w-full mb-4"
+      >
+        🔓 Quero aprender a restaurar minha Bíblia — R$ 47,90
+      </a>
+
+      <!-- Hotmart badge + métodos -->
+      <div class="flex flex-col items-center gap-2 mb-8">
+        <p class="text-gray-500 text-xs">
+          🔒 Compra 100% segura pela &nbsp;<strong class="text-gray-300">Hotmart</strong>
+        </p>
+        <div class="flex items-center gap-3 flex-wrap justify-center">
+          <span class="bg-white/10 text-gray-300 text-xs px-3 py-1 rounded-full">Pix</span>
+          <span class="bg-white/10 text-gray-300 text-xs px-3 py-1 rounded-full">Cartão de crédito</span>
+          <span class="bg-white/10 text-gray-300 text-xs px-3 py-1 rounded-full">Boleto</span>
+          <span class="bg-white/10 text-gray-300 text-xs px-3 py-1 rounded-full">PayPal</span>
+        </div>
+      </div>
+
+      <!-- Garantia -->
+      <div class="guarantee-box rounded-2xl p-6 text-center">
+        <div class="text-4xl mb-3">🛡️</div>
+        <h3 class="font-serif text-xl font-bold mb-2 text-white">Garantia de 7 dias</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Se por qualquer motivo você não ficar satisfeito(a) com o curso, basta nos enviar um e-mail em até 7 dias após a compra e devolvemos 100% do seu investimento. Sem perguntas. Sem burocracia.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════ -->
+  <footer class="bg-brand-black border-t border-white/10 py-10 px-5 text-center">
+    <div class="max-w-lg mx-auto">
+
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <span class="font-serif text-lg font-bold text-white">Ateliê Zoê</span>
+      </div>
+
+      <p class="text-gray-500 text-xs mb-4">
+        © 2026 Ateliê Zoê — Todos os direitos reservados.
+      </p>
+
+      <div class="flex justify-center gap-5 text-gray-600 text-xs">
+        <span class="text-gray-600">Política de Privacidade</span>
+        <span>·</span>
+        <span class="text-gray-600">Termos de Uso</span>
+        <span>·</span>
+        <a href="mailto:contato@ateliezoe.com.br" class="hover:text-gray-400 transition-colors">Contato</a>
+      </div>
+
+      <p class="text-gray-700 text-xs mt-5 leading-relaxed">
+        Este produto é distribuído pela plataforma de infoprodutos. As imagens e depoimentos são de alunas reais e foram divulgados com autorização. Os resultados podem variar de acordo com a dedicação e prática de cada aluna.
+      </p>
+
+    </div>
+  </footer>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     STICKY CTA MOBILE — aparece após 3s, some ao chegar na oferta
+════════════════════════════════════════════════════════════ -->
+<div id="sticky-cta" style="
+  display:none;
+  position:fixed;
+  bottom:0;left:0;right:0;
+  z-index:999;
+  padding:12px 16px;
+  background:#FF4B4B;
+  box-shadow:0 -4px 20px rgba(0,0,0,0.25);
+  ">
+  <a href="https://pay.hotmart.com/B79586517T?checkoutMode=0"
+     target="_blank" rel="noopener"
+     style="display:flex;align-items:center;justify-content:center;gap:10px;color:#fff;text-decoration:none;font-weight:700;font-size:1rem;">
+    🔓 Garantir meu acesso — R$ 47,90
+  </a>
+</div>
+<script>
+(function(){
+  var bar   = document.getElementById('sticky-cta');
+  var offer = document.getElementById('oferta');
+  if(!bar) return;
+  /* Só mobile (< 640px) */
+  if(window.innerWidth >= 640) return;
+  /* Aparece após 3s */
+  setTimeout(function(){ bar.style.display = 'block'; }, 3000);
+  /* Some quando a seção oferta está visível */
+  window.addEventListener('scroll', function(){
+    if(!offer) return;
+    var rect = offer.getBoundingClientRect();
+    bar.style.display = (rect.top < window.innerHeight && rect.bottom > 0) ? 'none' : 'block';
+  }, { passive: true });
+})();
+</script>
+
+<!-- ============================================================
+     RASTREAMENTO — Ateliê Zoê (Vercel + CAPI)
+     ─────────────────────────────────────────────────────────────
+     ARQUITETURA:
+       Browser → Pixel (fbq)  → Meta  [com deduplicação por event_id]
+       Browser → /api/track   → Vercel Serverless → Meta CAPI (server-side)
+
+     VARIÁVEIS DE AMBIENTE (configurar no painel Vercel):
+       CAPI_ACCESS_TOKEN → Meta Events Manager → seu Pixel → Configurações
+                           → API de Conversões → Gerar token de acesso
+       PIXEL_ID          → já definido no código (144321805290742)
+
+     PARA ATIVAR GA4 via GTM:
+       Troque GTM_ID abaixo pelo seu ID real (GTM-XXXXXX)
+       Dentro do GTM: crie tag GA4 + gatilhos para click_cta / scroll_depth / tempo_pagina
+============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ════════════════════════════════════════════════════════════
+     IDs — só o GTM falta; Pixel já está ativo
+  ════════════════════════════════════════════════════════════ */
+  var GTM_ID   = 'GTM-XXXXXXX';     /* ← troque pelo seu ID GTM quando criar */
+  var PIXEL_ID = '144321805290742'; /* Pixel Ateliê Zoê */
+
+  var GTM_ATIVO   = GTM_ID !== 'GTM-XXXXXXX' && GTM_ID !== '';
+  var PIXEL_ATIVO = true; /* Pixel ID real já definido */
+
+  /* ── dataLayer para GA4 via GTM ── */
+  window.dataLayer = window.dataLayer || [];
+  function pushGA4(name, params) {
+    window.dataLayer.push(Object.assign({ event: name }, params || {}));
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     HELPERS — event_id, cookies _fbp/_fbc, CAPI + Pixel juntos
+  ════════════════════════════════════════════════════════════ */
+
+  /* Gera ID único por evento para deduplicação Meta */
+  function genEventId() {
+    return 'ev_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+  }
+
+  /* Lê cookie pelo nome */
+  function getCookie(name) {
+    var m = document.cookie.match('(?:^|;)\\s*' + name + '=([^;]*)');
+    return m ? decodeURIComponent(m[1]) : undefined;
+  }
+
+  /* Dispara Pixel browser + CAPI server-side com mesmo event_id */
+  function track(eventName, customData) {
+    var eventId = genEventId();
+    var fbpCookie = getCookie('_fbp');
+    var fbcCookie = getCookie('_fbc');
+
+    /* ── Browser Pixel (com eventID para deduplicação) ── */
+    if (typeof fbq === 'function') {
+      fbq('track', eventName, customData || {}, { eventID: eventId });
+    }
+
+    /* ── CAPI server-side via Vercel /api/track ── */
+    fetch('/api/track', {
+      method  : 'POST',
+      headers : { 'Content-Type': 'application/json' },
+      body    : JSON.stringify({
+        event_name       : eventName,
+        event_id         : eventId,
+        event_source_url : window.location.href,
+        fbp              : fbpCookie,
+        fbc              : fbcCookie,
+        custom_data      : customData || {}
+      })
+    }).catch(function() { /* falha silenciosa */ });
+
+    return eventId;
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     CARREGAMENTO DEFERIDO — GTM + Pixel após window.load
+     Zero impacto no LCP / PageSpeed
+  ════════════════════════════════════════════════════════════ */
+  window.addEventListener('load', function() {
+
+    /* ── GTM (quando ID real estiver configurado) ── */
+    if (GTM_ATIVO) {
+      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src   = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+      document.head.appendChild(s);
+    }
+
+    /* ── Meta Pixel browser ── */
+    if (PIXEL_ATIVO) {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+      fbq('init', PIXEL_ID);
+
+      /* PageView — browser-only (sem CAPI, evento de baixo valor) */
+      fbq('track', 'PageView');
+
+      /* ViewContent — browser + CAPI (evento importante para audiências) */
+      track('ViewContent', {
+        content_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
+        content_type : 'product',
+        content_ids  : ['reforma-biblias-v1'],
+        value        : 47.90,
+        currency     : 'BRL'
+      });
+    }
+
+  }); /* fim window.load */
+
+  /* ════════════════════════════════════════════════════════════
+     1. CLIQUE NO CTA → InitiateCheckout (browser + CAPI)
+        O evento mais importante antes do Purchase
+  ════════════════════════════════════════════════════════════ */
+  document.querySelectorAll('a[href*="hotmart.com"]').forEach(function(btn, index) {
+    btn.addEventListener('click', function() {
+      var posicao = index === 0 ? 'hero' : index === 1 ? 'meio_pagina' : 'oferta_final';
+      var dados   = {
+        content_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
+        content_ids  : ['reforma-biblias-v1'],
+        value        : 47.90,
+        currency     : 'BRL',
+        num_items    : 1
+      };
+
+      /* GA4 via GTM */
+      pushGA4('click_cta', { cta_posicao: posicao, valor: 47.90, moeda: 'BRL' });
+      pushGA4('begin_checkout', {
+        currency : 'BRL', value: 47.90,
+        items    : [{ item_id: 'reforma-biblias-v1',
+                      item_name: 'Curso Reforma de Bíblias — Ateliê Zoê',
+                      price: 47.90, quantity: 1 }]
+      });
+
+      /* Meta: Pixel browser + CAPI server-side com deduplicação */
+      track('InitiateCheckout', dados);
+    });
+  });
+
+  /* ════════════════════════════════════════════════════════════
+     2. SCROLL DEPTH — 25 / 50 / 75 / 90%
+  ════════════════════════════════════════════════════════════ */
+  var scrollMarcas = [25, 50, 75, 90], scrollHit = {};
+  window.addEventListener('scroll', function() {
+    var pct = Math.floor(((window.scrollY + window.innerHeight) /
+                           document.documentElement.scrollHeight) * 100);
+    scrollMarcas.forEach(function(m) {
+      if (!scrollHit[m] && pct >= m) {
+        scrollHit[m] = true;
+        pushGA4('scroll_depth', { profundidade_pct: m });
+      }
+    });
+  }, { passive: true });
+
+  /* ════════════════════════════════════════════════════════════
+     3. TEMPO NA PÁGINA — 30s / 60s / 120s
+  ════════════════════════════════════════════════════════════ */
+  [{ s: 30, l: '30s' }, { s: 60, l: '60s' }, { s: 120, l: '120s' }].forEach(function(t) {
+    setTimeout(function() { pushGA4('tempo_pagina', { tempo: t.l }); }, t.s * 1000);
+  });
+
+})();
+</script>
+
+</body>
+</html>
