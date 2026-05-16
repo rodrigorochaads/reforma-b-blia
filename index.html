@@ -1174,21 +1174,7 @@
   ════════════════════════════════════════════════════════════ */
   window.addEventListener('load', function() {
 
-    /* ── GA4 direto ── */
-    var GA4_ID = 'G-B1S8MMNR70';
-    (function(){
-      var g = document.createElement('script');
-      g.async = true;
-      g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
-      document.head.appendChild(g);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', GA4_ID);
-    })();
-
-    /* ── GTM ── */
+    /* ── GTM (carrega GA4 internamente via tag configurada no GTM) ── */
     if (GTM_ATIVO) {
       window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
       var s = document.createElement('script');
