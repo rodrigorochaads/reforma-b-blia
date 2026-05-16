@@ -1267,7 +1267,18 @@
   }, { passive: true });
 
   /* ════════════════════════════════════════════════════════════
-     3. TEMPO NA PÁGINA — 30s / 60s / 120s
+     3. CLIQUE NO WHATSAPP — Contact (browser + CAPI + GA4)
+  ════════════════════════════════════════════════════════════ */
+  var waBtn = document.getElementById('whatsapp-btn');
+  if (waBtn) {
+    waBtn.addEventListener('click', function() {
+      pushGA4('whatsapp_click', { metodo: 'whatsapp' });
+      track('Contact', { content_name: 'WhatsApp Ateliê Zoê' });
+    });
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     4. TEMPO NA PÁGINA — 30s / 60s / 120s
   ════════════════════════════════════════════════════════════ */
   [{ s: 30, l: '30s' }, { s: 60, l: '60s' }, { s: 120, l: '120s' }].forEach(function(t) {
     setTimeout(function() { pushGA4('tempo_pagina', { tempo: t.l }); }, t.s * 1000);
