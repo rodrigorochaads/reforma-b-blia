@@ -1192,20 +1192,8 @@
       setTimeout(_loadGTM, 4000); /* fallback: carrega em 4s mesmo sem interação */
     }
 
-    /* ── Meta Pixel browser ── */
+    /* ── CAPI ViewContent — server-side imediato (não depende do Pixel browser) ── */
     if (PIXEL_ATIVO) {
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-      fbq('init', PIXEL_ID);
-
-      /* PageView — browser-only (sem CAPI, evento de baixo valor) */
-      fbq('track', 'PageView');
-
-      /* ViewContent — browser + CAPI (evento importante para audiências) */
       track('ViewContent', {
         content_name : 'Curso Reforma de Bíblias — Ateliê Zoê',
         content_type : 'product',
@@ -1213,6 +1201,27 @@
         value        : 47.90,
         currency     : 'BRL'
       });
+    }
+
+    /* ── Meta Pixel browser — carrega após 1ª interação (melhora PageSpeed) ── */
+    /* ViewContent já foi enviado via CAPI acima; browser Pixel captura demais eventos */
+    if (PIXEL_ATIVO) {
+      var _pixelLoaded = false;
+      function _loadPixel() {
+        if (_pixelLoaded) return;
+        _pixelLoaded = true;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+        (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', PIXEL_ID);
+        fbq('track', 'PageView');
+      }
+      ['scroll','click','mousemove','touchstart'].forEach(function(ev) {
+        window.addEventListener(ev, _loadPixel, { once: true, passive: true });
+      });
+      setTimeout(_loadPixel, 4000);
     }
 
   }); /* fim window.load */
